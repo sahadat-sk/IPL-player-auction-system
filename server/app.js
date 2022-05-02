@@ -1,11 +1,16 @@
-const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+dotenv  .config({ path: "../.env" });
+import connectDb from "./config/db.js";
+import userRouter from "./routes/userRoutes.js";
+//connecting to the databse
+connectDb();
+
 const app = express();
-const port = 3000;
+app.use(express.json()); // to read json data
 
-app.get("/", (req, res) => {
-    res.send("hello world");
-});
+app.use(userRouter);
 
-app.listen(port, () => {
-    console.log(`listining to port ${port}`);
+app.listen(process.env.PORT_NO, () => {
+    console.log(`listining to port ${process.env.PORT_NO}`);
 });
