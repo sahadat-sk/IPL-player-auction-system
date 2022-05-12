@@ -1,17 +1,24 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./headers/navBar.js";
 import Footer from "./footers/footer.js";
 import Landingpage from "./landingPage/landingPage.js";
+import LoginPage from "./pages/loginPage.js";
+import SignupPage from "./pages/signupPage.js";
 
 function App() {
     return (
-        <>
-            <Navbar></Navbar>
+        <Router>
+            <Navbar />
             <main>
-                <Landingpage></Landingpage>
+                <Routes>
+                    <Route path="/" element={<Landingpage />} exact />
+                    <Route path="/signup" element={<LoginPage />} />
+                    <Route path="/login" element={<SignupPage />} />
+                </Routes>
             </main>
-                <Footer></Footer>
-        </>
+            <Footer />
+        </Router>
     );
 }
 
