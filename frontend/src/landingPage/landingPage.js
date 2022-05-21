@@ -1,21 +1,19 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./landingpage.css";
 const landingPage = () => {
     return (
         <>
             <div className="landing-page">
-                <Link to="/login">
-                    <Button variant="primary" size="lg">
-                        LOG IN
-                    </Button>{" "}
-                </Link>
-                <Link to="/signup">
-                    <Button variant="outline-primary" size="lg">
-                        SIGN UP
-                    </Button>{" "}
-                </Link>
+                <div className="title">IPL Player auction system</div>
+                <div className="auth">
+                    <Link to="/signup">
+                        <div className="button">signup</div>
+                    </Link>
+                    <Link to="/login">
+                        <div className="button">login</div>
+                    </Link>
+                </div>
             </div>
         </>
     );
