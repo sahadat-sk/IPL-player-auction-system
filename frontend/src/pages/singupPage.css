@@ -1,5 +1,40 @@
-.card-container{
+.card-container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.main {
+    height: 91vh;
+    width: 100%;
+    background-image: url(../bgimage/6660_generated.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+.players {
+    display: flex;
+    height: 100%;
+    width: 100%;
+   
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.player-card {
+    height: 20rem;
+    width: 15rem;
+    background-color: yellow;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bid{
+  background-color: red;
 }

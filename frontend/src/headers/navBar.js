@@ -11,9 +11,14 @@ const navBar = () => {
                         <h1 className="nav">IPL BIDDER</h1>
                     </Navbar.Brand>
                     <Nav className="me-auto">
-                        <Link to="/">
-                            <Nav.Link>Home</Nav.Link>
-                        </Link>
+                        
+                            <Nav.Link >
+                                <Link to="/">
+                                Home
+                                </Link>
+                                
+                                </Nav.Link>
+                        
                         <Nav.Link>Features</Nav.Link>
                         <Nav.Link>Pricing</Nav.Link>
                     </Nav>

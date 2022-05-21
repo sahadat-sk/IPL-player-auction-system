@@ -5,6 +5,7 @@ import Footer from "./footers/footer.js";
 import Landingpage from "./landingPage/landingPage.js";
 import LoginPage from "./pages/loginPage.js";
 import SignupPage from "./pages/signupPage.js";
+import MainPage from "./pages/mainPage";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/" element={<Landingpage />} exact />
                     <Route path="/signup" element={<LoginPage />} />
                     <Route path="/login" element={<SignupPage />} />
+                    <Route path="/mainpage" element={<MainPage/>} />
                 </Routes>
             </main>
             <Footer />

@@ -7,7 +7,7 @@ import generateToken from "../util/generateToken.js";
 //for creating a new user
 const createUser = asyncHandler(async (req, res) => {
     const { teamName, password } = req.body;
-    
+
     const userExists = await User.findOne({ teamName });
     if (userExists) {
         throw new Error("user already exists");
@@ -32,9 +32,9 @@ const createUser = asyncHandler(async (req, res) => {
 
 // authenticate user while login
 const authUser = asyncHandler(async (req, res) => {
-    let { userName, password } = req.body;
-    console.log(req.body);
-    let user = await User.findOne({ userName });
+    const { teamName, password } = req.body;
+
+    let user = await User.findOne({ teamName });
     if (user && (await user.verify(password))) {
         res.status(201).json({
             __id: user.__id,
@@ -43,10 +43,11 @@ const authUser = asyncHandler(async (req, res) => {
             currentMoney: user.currentMoney,
             token: generateToken(user.__id),
         });
+        console.log("user found");
     } else {
         res.status(400);
-        console.log(user);
+
         throw new Error("USER NOT FOUND");
     }
 });
-export { createUser ,authUser};
+export { createUser, authUser };

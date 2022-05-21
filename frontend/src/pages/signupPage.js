@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import "./singupPage.css";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
-    const submitHandler = (e) => {
+
+    
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        let userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            navigate("/mainpage");
+        }
+    }, [navigate]);
+
+    const submitHandler = async (e) => {
         e.preventDefault();
         try {
             const config = {
@@ -15,7 +27,7 @@ const SignupPage = () => {
                     "Content-type": "application/json",
                 },
             };
-            const { data } = axios.post(
+            const { data } = await axios.post(
                 "/login",
                 {
                     teamName: username,
@@ -23,7 +35,12 @@ const SignupPage = () => {
                 },
                 config
             );
-        } catch (error) {}
+            console.log("USER INFO IS:  ", data);
+            localStorage.setItem("userInfo",JSON.stringify(data));
+            navigate("/mainpage");
+        } catch (error) {
+            console.log(error);
+        }
     };
     return (
         <>
