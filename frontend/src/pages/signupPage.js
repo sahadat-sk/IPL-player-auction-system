@@ -28,63 +28,49 @@ const SignupPage = () => {
                 },
             };
             const { data } = await axios.post(
-                "/login",
+                "/signup",
                 {
                     teamName: username,
                     password,
                 },
                 config
             );
-            console.log("USER INFO IS:  ", data);
             localStorage.setItem("userInfo",JSON.stringify(data));
             navigate("/mainpage");
         } catch (error) {
             console.log(error);
         }
     };
+    
     return (
-        <>
-            <div className="card-container">
-                <Card style={{ width: "20rem" }}>
-                    <Card.Body>
-                        <Card.Title>Login</Card.Title>
-                        <Form onSubmit={submitHandler}>
-                            <Form.Group
-                                className="mb-3"
-                                controlId="formGroupEmail"
-                            >
-                                <Form.Label>user name</Form.Label>
-                                <Form.Control
-                                    type="string"
-                                    placeholder="Enter user name"
-                                    value={username}
-                                    onChange={(e) =>
-                                        setusername(e.target.value)
-                                    }
-                                />
-                            </Form.Group>
-                            <Form.Group
-                                className="mb-3"
-                                controlId="formGroupPassword"
-                            >
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) =>
-                                        setpassword(e.target.value)
-                                    }
-                                />
-                            </Form.Group>
-                            <Button variant="primary" type="submit">
-                                Login
-                            </Button>
-                        </Form>
-                    </Card.Body>
-                </Card>
-            </div>
-        </>
+        <div className="main">
+            <form className="card-container" onSubmit={submitHandler}>
+                <h1 className="form-heading">SIGN UP</h1>
+                <label className="form-label">
+                    username:
+                    <br />
+                    <input
+                        type="text"
+                        name="name"
+                        onChange={(e) => {
+                            setusername(e.target.value);
+                        }}
+                    />
+                </label>
+                <label className="form-label">
+                    password:
+                    <br />
+                    <input
+                        type="password"
+                        name="password"
+                        onChange={(e) => {
+                            setpassword(e.target.value);
+                        }}
+                    />
+                </label>
+                <input className="button" type="submit" value="signup" />
+            </form>
+        </div>
     );
 };
 

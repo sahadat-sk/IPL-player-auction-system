@@ -8,11 +8,8 @@ router.get("/", (req, res) => {
 router.post("/signup", createUser);
 router.post("/login", authUser);
 router.get("/mainpage",protect, (req, res) => {
-    console.log("chi chi")
+    console.log("in the mainpage route")
     res.send("hello");
 });
-router.get("/logout",(req,res)=>{
-    localStorage.removeItem()
-})
 
 export default router;

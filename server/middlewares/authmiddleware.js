@@ -14,17 +14,18 @@ const protect = asynchandler(async (req, res, next) => {
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-            req.user = await User.findById(decoded.id).select("-password");
-
+            req.user = await User.findById(decoded.id);
+            console.log(req.user);
             next();
         } catch (err) {
             console.log(err);
-            res.status(401);
+            res.redirect("/");
+
             throw new Error("invalid token");
         }
     }
     if (!token) {
-        res.status(401);
+        res.redirect("/");
         throw new Error("token not found 2");
     }
 });

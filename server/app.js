@@ -10,6 +10,11 @@ connectDb();
 
 const app = express();
 app.use(express.json()); // to read json data
+app.use(
+    cors({
+        origin: "*",
+    })
+);
 
 app.use(userRouter);
 
@@ -19,12 +24,13 @@ const server = app.listen(process.env.PORT_NO, () => {
 
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*",
     },
 });
 io.on("connection", (socket) => {
     console.log(`connected to socket.io with ${socket.id}`);
     socket.on("bid", (data) => {
         console.log(data);
+        socket.broadcast.emit("bid_inc", data);
     });
 });
