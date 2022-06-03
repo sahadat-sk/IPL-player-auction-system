@@ -7,9 +7,9 @@ router.get("/", (req, res) => {
 });
 router.post("/signup", createUser);
 router.post("/login", authUser);
-router.get("/mainpage",protect, (req, res) => {
-    console.log("in the mainpage route")
-    res.send("hello");
-});
+// router.get("/mainpage",protect, (req, res) => {
+//     console.log("in the mainpage route")
+//     res.send("hello");
+// });
 
 export default router;

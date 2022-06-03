@@ -5,25 +5,28 @@ import asynchandler from "express-async-handler";
 const protect = asynchandler(async (req, res, next) => {
     let token;
     console.log("I am here");
-    if (
-        req.headers.authorization &&
-        req.headers.authorization.startsWith("Bearer")
-    ) {
-        try {
-            token = req.headers.authorization.split(" ")[1];
+    // if (
+    //     req.headers.authorization &&
+    //     req.headers.authorization.startsWith("Bearer")
+    // ) {
+    try {
+        token = req.headers.authorization.split(" ")[1];
+        console.log(token);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-            req.user = await User.findById(decoded.id);
-            console.log(req.user);
-            next();
-        } catch (err) {
-            console.log(err);
+        req.user = await User.findById(decoded._id);
+        console.log(req.user);
+        if (!req.user) {
             res.redirect("/");
-
-            throw new Error("invalid token");
         }
+        next();
+    } catch (err) {
+        console.log(err);
+        res.redirect("/");
+
+        throw new Error("invalid token");
     }
+
     if (!token) {
         res.redirect("/");
         throw new Error("token not found 2");

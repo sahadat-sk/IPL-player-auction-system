@@ -3,26 +3,30 @@ import "./singupPage.css";
 import io from "socket.io-client";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Player from "../components/player";
 
 const socket = io("http://127.0.0.1:5000");
 
 const MainPage = () => {
-    const [price, setPrice] = useState(0);
+   // const [price, setPrice] = useState(0);
     const navigate = useNavigate();
 
-    const clickHandler = () => {
-        console.log(price);
-        socket.emit("bid", {price});
-        setPrice(price + 100);
-    };
+    
 
     useEffect(() => {
-        console.log("changing")
-        socket.on("bid_inc", (data) => {
-            console.log(data);
-            setPrice(data.price);
-        });
-    }, [socket]);
+        if (!localStorage.getItem("userInfo")) {
+            console.log(" inside if ..");
+            navigate("/login");
+        }
+    }, [navigate]);
+
+    // useEffect(() => {
+    //     console.log("changing");
+    //     socket.on("bid_inc", (data) => {
+    //         console.log(data);
+    //         setPrice(data.price);
+    //     });
+    // }, []);
 
     return (
         <div className="main">
@@ -36,27 +40,9 @@ const MainPage = () => {
                 logout
             </div>
             <div className="players">
-                <div className="player-card">
-                    <div className="name">dhoni</div>
-                    <div className="curr-price">{price}</div>
-                    <button className="bid" onClick={clickHandler}>
-                        bid on this player
-                    </button>
-                </div>
-                <div className="player-card">
-                    <div className="name">kohli</div>
-                    <div className="curr-price">5</div>
-                    <button className="bid" onClick={clickHandler}>
-                        bid on this player
-                    </button>
-                </div>
-                <div className="player-card">
-                    <div className="name">idk</div>
-                    <div className="curr-price">10000</div>
-                    <button className="bid" onClick={clickHandler}>
-                        bid on this player
-                    </button>
-                </div>
+                <Player name="dhoni" inprice={10} id="1"></Player>
+                <Player name="kohli" inprice={5} id="2"></Player>
+                <Player name="ami" inprice={1000} id="3"></Player>
             </div>
         </div>
     );
