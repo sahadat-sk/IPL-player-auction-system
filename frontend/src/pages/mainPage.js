@@ -1,32 +1,28 @@
 import React, { useEffect } from "react";
 import "./singupPage.css";
-import io from "socket.io-client";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Player from "../components/player";
+import Player from "../components/player.js";
+import axios from "axios";
 
-const socket = io("http://127.0.0.1:5000");
+//const socket = io("http://127.0.0.1:5000");
 
 const MainPage = () => {
-   // const [price, setPrice] = useState(0);
+    const [players, setPlayers] = useState([]);
     const navigate = useNavigate();
-
-    
 
     useEffect(() => {
         if (!localStorage.getItem("userInfo")) {
             console.log(" inside if ..");
             navigate("/login");
         }
+        const players = async () => {
+            const {data} = await axios.get("/mainpage");
+            setPlayers(data);
+        }
+        players();
     }, [navigate]);
-
-    // useEffect(() => {
-    //     console.log("changing");
-    //     socket.on("bid_inc", (data) => {
-    //         console.log(data);
-    //         setPrice(data.price);
-    //     });
-    // }, []);
 
     return (
         <div className="main">
@@ -40,9 +36,19 @@ const MainPage = () => {
                 logout
             </div>
             <div className="players">
-                <Player name="dhoni" inprice={10} id="1"></Player>
+                {/* <Player name="dhoni" inprice={10} id="1"></Player>
                 <Player name="kohli" inprice={5} id="2"></Player>
-                <Player name="ami" inprice={1000} id="3"></Player>
+                <Player name="ami" inprice={1000} id="3"></Player> */}
+                {players.map((player) => {
+                    return (
+                        <Player
+                            key={player.uniqueId}
+                            name={player.name}
+                            inprice={player.current_price}
+                            id={player._id}
+                        ></Player>
+                    );
+                })}
             </div>
         </div>
     );

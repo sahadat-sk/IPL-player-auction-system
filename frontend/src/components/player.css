@@ -1,0 +1,15 @@
+.player-card {
+    background-color: #565656;
+    height: 30rem;
+    width: 20rem;
+    border-radius: 1%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    
+    align-items: center;
+}
+.cditem {
+    font-size: 1.7rem;
+    color: beige;
+}

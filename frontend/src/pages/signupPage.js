@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+
 import "./singupPage.css";
 import { useState } from "react";
 import axios from "axios";

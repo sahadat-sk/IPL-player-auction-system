@@ -5,7 +5,7 @@ import Footer from "./footers/footer.js";
 import Landingpage from "./landingPage/landingPage.js";
 import LoginPage from "./pages/loginPage.js";
 import SignupPage from "./pages/signupPage.js";
-import MainPage from "./pages/mainPage";
+import MainPage from "./pages/mainPage.js";
 
 function App() {
     return (

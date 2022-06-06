@@ -28,9 +28,9 @@ const io = new Server(server, {
     },
 });
 io.on("connection", (socket) => {
-    console.log(`connected to socket.io with ${socket.id}`);
+    //console.log(`connected to socket.io with ${socket.id}`);
     socket.on("bid", (data) => {
-        console.log(data);
+        //console.log(data);
         socket.broadcast.emit("bid_inc", data);
     });
 });
