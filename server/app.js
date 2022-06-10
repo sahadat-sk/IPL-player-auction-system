@@ -33,4 +33,9 @@ io.on("connection", (socket) => {
         //console.log(data);
         socket.broadcast.emit("bid_inc", data);
     });
+    socket.on("exp", (data) => {
+        //console.log(data);
+        const playerSoldto = statUpdater(data.id, data.userId);
+        socket.broadcast.emit("exp_inc", data);
+    });
 });

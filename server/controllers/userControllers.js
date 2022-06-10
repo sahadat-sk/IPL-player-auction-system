@@ -18,7 +18,7 @@ const createUser = asyncHandler(async (req, res) => {
     });
     if (user) {
         res.status(201).json({
-            __id: user.__id,
+            id: user._id,
             teamName: user.teamName,
             password: user.password,
             currentMoney: user.currentMoney,
@@ -37,7 +37,7 @@ const authUser = asyncHandler(async (req, res) => {
     let user = await User.findOne({ teamName });
     if (user && (await user.verify(password))) {
         res.status(201).json({
-            __id: user.__id,
+            id: user._id,
             teamName: user.teamName,
             password: user.password,
             currentMoney: user.currentMoney,

@@ -46,6 +46,8 @@ const MainPage = () => {
                             name={player.name}
                             inprice={player.current_price}
                             id={player._id}
+                            userId = {localStorage.getItem("userInfo").id}
+                            userName = {localStorage.getItem("userInfo").teamName}
                         ></Player>
                     );
                 })}

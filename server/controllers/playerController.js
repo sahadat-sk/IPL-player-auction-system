@@ -23,4 +23,11 @@ const playerUpdater = async (req, res) => {
         throw new Error("player not found");
     }
 };
+
+const statUpdater = (id,userId)=>{
+    const data = Player.findByIdAndUpdate(id, {current_price: price});
+    
+
+}
+
 export { playerController , playerUpdater}; 
