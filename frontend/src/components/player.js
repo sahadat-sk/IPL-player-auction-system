@@ -6,16 +6,20 @@ import "./player.css";
 import Timer from "./timer.js";
 const socket = io("http://127.0.0.1:5000");
 
-const Player = ({ name, inprice, id, userId,userName}) => {
+const Player = ({ name, inprice, id, userId, userName }) => {
     const [price, setPrice] = useState(inprice);
-    const [isRunning, setIsRunning] = useState(true);
+    const [isSold, setIsSold] = useState(false);
+    const [owner, setOwner] = useState("");
+    const [isExpired, setIsExpired] = useState(false);
 
-    const clickHandler = () => {
+    const clickHandler = async () => {
         //console.log(price);
         socket.emit("bid", { price, id });
         const newPrice = price + 100;
         setPrice(newPrice);
-        axios.put("/mainpage", { id, price: newPrice });
+        setOwner(userName);
+        setIsSold(true);
+        await axios.put("/mainpage", { id, price: newPrice, userId, userName });
     };
     useEffect(() => {
         socket.on("bid_inc", (data) => {
@@ -24,22 +28,43 @@ const Player = ({ name, inprice, id, userId,userName}) => {
                 setPrice(data.price + 100);
             }
         });
-        socket.on("")
+        socket.on("player_exp", (data) => {
+            if (data.id === id) {
+                setIsExpired(true);
+            }
+        });
     }, [id]);
-     const time = new Date();
-     time.setSeconds(time.getSeconds() + 60);
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 60);
 
     return (
         <div className="player-card">
-            <Timer expiryTimestamp={time} id={id} userId={userId} userName = {userName} />
-            <div className="name cditem">{name}</div>
-            <div className="curr-price cditem">
-                Current Price(lac) : <br />
-                {price}
-            </div>
-            <button className="bid cditem" onClick={clickHandler}>
-                Bid on {name}
-            </button>
+            {!isExpired && (
+                <div>
+                    <Timer
+                        expiryTimestamp={time}
+                        id={id}
+                        userId={userId}
+                        userName={userName}
+                    />
+                    <div className="name cditem">{name}</div>
+                    <div className="curr-price cditem">
+                        Current Price(lac) : <br />
+                        {price}
+                    </div>
+                    <button className="bid cditem" onClick={clickHandler}>
+                        Bid on {name}
+                    </button>
+                </div>
+            )}
+            {isExpired && (
+                <div>
+                    <div className="name cditem">{name}</div>
+                    <div className="curr-price cditem">
+                        sold to {owner} for {price} lacs
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

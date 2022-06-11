@@ -10,6 +10,9 @@ import axios from "axios";
 
 const MainPage = () => {
     const [players, setPlayers] = useState([]);
+    const [userId, setUserId] = useState("");
+    const [userName, setUserName] = useState("");
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,9 +21,12 @@ const MainPage = () => {
             navigate("/login");
         }
         const players = async () => {
-            const {data} = await axios.get("/mainpage");
+            const { data } = await axios.get("/mainpage");
             setPlayers(data);
-        }
+        };
+        const info = JSON.parse(localStorage.getItem("userInfo"));
+        setUserId(info.id);
+        setUserName(info.teamName);
         players();
     }, [navigate]);
 
@@ -46,8 +52,8 @@ const MainPage = () => {
                             name={player.name}
                             inprice={player.current_price}
                             id={player._id}
-                            userId = {localStorage.getItem("userInfo").id}
-                            userName = {localStorage.getItem("userInfo").teamName}
+                            userId={userId}
+                            userName={userName}
                         ></Player>
                     );
                 })}

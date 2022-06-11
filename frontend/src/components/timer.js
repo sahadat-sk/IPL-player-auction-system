@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 const socket = io("http://127.0.0.1:5000");
 
-const MyTimer = ({ expiryTimestamp, id ,userId,userName}) => {
+const MyTimer = ({ expiryTimestamp, id, userId, userName }) => {
     const {
         seconds,
         minutes,
@@ -17,14 +17,11 @@ const MyTimer = ({ expiryTimestamp, id ,userId,userName}) => {
         restart,
     } = useTimer({
         expiryTimestamp,
-        onExpire: () => console.warn("onExpire called"),
+        onExpire: () => {
+            socket.emit("exp", { id, userId, userName });
+        },
     });
-    useEffect(() => {
-        if (!isRunning) {
-            socket.emit("exp", { id ,userId,userName});
-        }
-    }, [isRunning, id]);
-
+    
     return (
         <div style={{ textAlign: "center" }}>
             <div style={{ fontSize: "2rem", color: "whitesmoke" }}>
