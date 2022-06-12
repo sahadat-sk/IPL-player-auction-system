@@ -6,10 +6,18 @@ import "./player.css";
 import Timer from "./timer.js";
 const socket = io("http://127.0.0.1:5000");
 
-const Player = ({ name, inprice, id, userId, userName }) => {
+const Player = ({
+    name,
+    inprice,
+    id,
+    userId,
+    userName,
+    curr_owner,
+    timeLeft,
+}) => {
     const [price, setPrice] = useState(inprice);
     const [isSold, setIsSold] = useState(false);
-    const [owner, setOwner] = useState("");
+    const [owner, setOwner] = useState(curr_owner);
     const [isExpired, setIsExpired] = useState(false);
 
     const clickHandler = async () => {
@@ -17,9 +25,17 @@ const Player = ({ name, inprice, id, userId, userName }) => {
         socket.emit("bid", { price, id });
         const newPrice = price + 100;
         setPrice(newPrice);
-        setOwner(userName);
         setIsSold(true);
-        await axios.put("/mainpage", { id, price: newPrice, userId, userName });
+        const { data } = await axios.put("/mainpage", {
+            id,
+            price: newPrice,
+            userId,
+            userName,
+            prevUserId: curr_owner,
+        });
+        console.log("player data", data);
+        setOwner(userName);
+        socket.emit("current_owner", { owner: userName, id });
     };
     useEffect(() => {
         socket.on("bid_inc", (data) => {
@@ -28,26 +44,34 @@ const Player = ({ name, inprice, id, userId, userName }) => {
                 setPrice(data.price + 100);
             }
         });
-        socket.on("player_exp", (data) => {
+
+        socket.on("change_current_owner", (data) => {
             if (data.id === id) {
-                setIsExpired(true);
+                setOwner(data.owner);
             }
+        });
+
+        socket.on("timeout", (data) => {
+            setIsExpired(true);
         });
     }, [id]);
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 60);
+    time.setSeconds(time.getSeconds() + timeLeft);
 
     return (
         <div className="player-card">
             {!isExpired && (
                 <div>
-                    <Timer
+                    {/* <Timer
                         expiryTimestamp={time}
                         id={id}
                         userId={userId}
                         userName={userName}
-                    />
+                    /> */}
+
                     <div className="name cditem">{name}</div>
+
+                    <div className="name cditem">owner: {owner}</div>
                     <div className="curr-price cditem">
                         Current Price(lac) : <br />
                         {price}

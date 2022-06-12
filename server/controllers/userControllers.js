@@ -6,7 +6,7 @@ import generateToken from "../util/generateToken.js";
 
 //for creating a new user
 const createUser = asyncHandler(async (req, res) => {
-    const { teamName, password } = req.body;
+    const { teamName, password, isAdmin } = req.body;
 
     const userExists = await User.findOne({ teamName });
     if (userExists) {
@@ -15,14 +15,16 @@ const createUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         teamName,
         password,
+        isAdmin,
     });
     if (user) {
         res.status(201).json({
             id: user._id,
             teamName: user.teamName,
             password: user.password,
+            isAdmin: user.isAdmin,
             currentMoney: user.currentMoney,
-            token: generateToken(user.__id),
+            token: generateToken(user._id),
         });
     } else {
         res.status(400);
@@ -41,7 +43,7 @@ const authUser = asyncHandler(async (req, res) => {
             teamName: user.teamName,
             password: user.password,
             currentMoney: user.currentMoney,
-            token: generateToken(user.__id),
+            token: generateToken(user._id),
         });
         console.log("user found");
     } else {
@@ -51,4 +53,3 @@ const authUser = asyncHandler(async (req, res) => {
     }
 });
 export { createUser, authUser };
-

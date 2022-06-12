@@ -6,6 +6,7 @@ import Landingpage from "./landingPage/landingPage.js";
 import LoginPage from "./pages/loginPage.js";
 import SignupPage from "./pages/signupPage.js";
 import MainPage from "./pages/mainPage.js";
+import AdminPage from "./pages/adminPage.js";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/mainpage" element={<MainPage/>} />
+                    <Route path="/adminpage" element={<AdminPage/>} />
                 </Routes>
             </main>
             <Footer />

@@ -20,6 +20,10 @@ const mySchema = new mongoose.Schema(
             type: String,
             default: "50000000",
         },
+        isAdmin: {
+            type: Boolean,
+            default: false,
+        }
     },
     {
         timestamps: true,

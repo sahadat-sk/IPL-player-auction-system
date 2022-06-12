@@ -8,16 +8,20 @@ import { useNavigate } from "react-router-dom";
 const SignupPage = () => {
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
+    const [isChecked, setisChecked] = useState(false);
 
-    
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         let userInfo = localStorage.getItem("userInfo");
         if (userInfo) {
             navigate("/mainpage");
         }
     }, [navigate]);
+
+    const handleCheckboxChange = () => {
+        setisChecked(!isChecked);
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -32,16 +36,20 @@ const SignupPage = () => {
                 {
                     teamName: username,
                     password,
+                    isAdmin: isChecked,
                 },
                 config
             );
-            localStorage.setItem("userInfo",JSON.stringify(data));
+            localStorage.setItem("userInfo", JSON.stringify(data));
+            if(isChecked){
+                navigate("/adminpage");
+            }
             navigate("/mainpage");
         } catch (error) {
             console.log(error);
         }
     };
-    
+
     return (
         <div className="main">
             <form className="card-container" onSubmit={submitHandler}>
@@ -66,6 +74,18 @@ const SignupPage = () => {
                         onChange={(e) => {
                             setpassword(e.target.value);
                         }}
+                    />
+                </label>
+                <label className="check">
+                    Admin user ? 
+                    <input
+                        type="checkbox"
+                        id="topping"
+                        name="checkbox"
+                        value="Paneer"
+                        checked={isChecked}
+                        onChange={handleCheckboxChange}
+                        className="checkbox"
                     />
                 </label>
                 <input className="button" type="submit" value="signup" />

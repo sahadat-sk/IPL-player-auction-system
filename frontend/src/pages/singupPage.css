@@ -36,6 +36,12 @@
     justify-content: center;
     gap: 1rem;
 }
+.players-admin {
+    display: inline;
+    width: 100%;
+    overflow: scroll;
+    
+}
 .player-card {
     height: 20rem;
     width: 15rem;
@@ -46,7 +52,23 @@
     justify-content: center;
     align-items: center;
 }
-
+.check{
+    font-size: 1.5rem;
+    color: whitesmoke;
+}
+.checkbox{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 1rem;
+}
 .bid{
   background-color: red;
+}
+.admin-main{
+    display: flex;
+    flex-direction: column;
+}
+.main-header{
+    font-size: 3rem;
+    color: #EDEDED;
 }
