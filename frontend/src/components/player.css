@@ -6,8 +6,10 @@
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    
+    margin-top:2rem;
+    margin-left:2rem;
     align-items: center;
+    padding: 1rem;
 }
 .admin-player-card{
     background-color: #565656;

@@ -42,6 +42,7 @@ const authUser = asyncHandler(async (req, res) => {
             id: user._id,
             teamName: user.teamName,
             password: user.password,
+            isAdmin: user.isAdmin,
             currentMoney: user.currentMoney,
             token: generateToken(user._id),
         });

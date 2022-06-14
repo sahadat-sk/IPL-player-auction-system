@@ -34,7 +34,9 @@
    
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    
+    flex-wrap: wrap;
+    overflow: scroll;
 }
 .players-admin {
     display: inline;
@@ -71,4 +73,10 @@
 .main-header{
     font-size: 3rem;
     color: #EDEDED;
+}
+.add-btn{
+    padding: 1rem;
+    margin-bottom:5rem;
+    height: 4rem;
+    width: 9rem;
 }

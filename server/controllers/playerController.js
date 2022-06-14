@@ -15,7 +15,7 @@ const playerController = async (req, res) => {
     }
 };
 const playerUpdater = async (req, res) => {
-    const { id, price, userId, userName ,prevUserId} = req.body;
+    const { id, price, userId, userName, prevUserId } = req.body;
 
     const data = await Player.findByIdAndUpdate(id, {
         current_price: price,
@@ -47,22 +47,36 @@ const playerUpdater = async (req, res) => {
     }
 };
 
-const updateTime = async (req, res) => {
-    const { id, sec, min } = req.body;
-    //console.log(id,min);
-    //let timeInMili = sec * 1000 + min * 60 * 1000;
-    const data = await Player.findById(id);
-    let timeInMili = data.time_left - 1000;
-    const data2 = await Player.findByIdAndUpdate(id, { time_left: timeInMili });
-    if (data2) {
-        res.status(201).json({
-            min: Math.floor(timeInMili / 1000 / 60),
-            sec: Math.floor(timeInMili / 1000 % 60),
-        });
+const addPlayer = async (req, res) => {
+    const { name, current_price } = req.body;
+    const player = await Player.create({
+        name,
+        current_price,
+    });
+    if (player) {
+        res.status(201).json(player);
     } else {
         res.status(400);
         throw new Error("player not found");
     }
 };
 
-export { playerController, playerUpdater, updateTime };
+// const updateTime = async (req, res) => {
+//     const { id, sec, min } = req.body;
+//     //console.log(id,min);
+//     //let timeInMili = sec * 1000 + min * 60 * 1000;
+//     const data = await Player.findById(id);
+//     let timeInMili = data.time_left - 1000;
+//     const data2 = await Player.findByIdAndUpdate(id, { time_left: timeInMili });
+//     if (data2) {
+//         res.status(201).json({
+//             min: Math.floor(timeInMili / 1000 / 60),
+//             sec: Math.floor(timeInMili / 1000 % 60),
+//         });
+//     } else {
+//         res.status(400);
+//         throw new Error("player not found");
+//     }
+// };
+
+export { playerController, playerUpdater, addPlayer };

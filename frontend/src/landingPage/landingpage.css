@@ -39,14 +39,14 @@
   text-decoration: none;
 }
 .button:hover{
-  height: 3rem;
+  /* height: 3rem;
   width: 7rem;
-  font-size: 1.4rem;
+  font-size: 1.4rem; */
   background-color: #ff4040;
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
   color: antiquewhite;
   border-radius: 20px;
-  text-decoration: none;
+  text-decoration: none; */
 }

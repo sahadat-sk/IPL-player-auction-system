@@ -21,13 +21,17 @@ const MainPage = () => {
 
     const navigate = useNavigate();
 
+    const handleAddButton = ()=>{
+        navigate("/addplayer");
+    }
+
     useEffect(() => {
-        if (!localStorage.getItem("userInfo") ) {
+        if (!localStorage.getItem("userInfo")) {
             console.log(" inside if ..");
             navigate("/login");
         }
         const data = JSON.parse(localStorage.getItem("userInfo"));
-        if(!data.isAdmin){
+        if (!data.isAdmin) {
             navigate("/mainpage");
         }
         const players = async () => {
@@ -65,7 +69,7 @@ const MainPage = () => {
             >
                 logout
             </div>
-            
+
             <div className="players players-admin">
                 {players.map((player) => {
                     //console.log(player.name, player.time_left);
@@ -80,6 +84,9 @@ const MainPage = () => {
                     );
                 })}
             </div>
+                <button className="button add-btn" onClick={handleAddButton}>
+                    Add player
+                </button>
         </div>
     );
 };

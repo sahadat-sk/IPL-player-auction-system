@@ -67,7 +67,7 @@ const MainPage = () => {
             >
                 logout
             </div>
-            <Timer expiryTimestamp={time} />
+            {/* <Timer expiryTimestamp={time} /> */}
             <div className="players">
                 {/* <Player name="dhoni" inprice={10} id="1"></Player>
                 <Player name="kohli" inprice={5} id="2"></Player>

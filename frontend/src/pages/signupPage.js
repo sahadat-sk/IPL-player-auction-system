@@ -12,12 +12,12 @@ const SignupPage = () => {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        let userInfo = localStorage.getItem("userInfo");
-        if (userInfo) {
-            navigate("/mainpage");
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     let userInfo = localStorage.getItem("userInfo");
+    //     if (userInfo) {
+    //         navigate("/mainpage");
+    //     }
+    // }, [navigate]);
 
     const handleCheckboxChange = () => {
         setisChecked(!isChecked);

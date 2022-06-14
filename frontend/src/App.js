@@ -7,6 +7,7 @@ import LoginPage from "./pages/loginPage.js";
 import SignupPage from "./pages/signupPage.js";
 import MainPage from "./pages/mainPage.js";
 import AdminPage from "./pages/adminPage.js";
+import Addplayer from "./pages/addplayer.js"
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/mainpage" element={<MainPage/>} />
                     <Route path="/adminpage" element={<AdminPage/>} />
+                    <Route path="/addplayer" element={<Addplayer/>}/>
                 </Routes>
             </main>
             <Footer />

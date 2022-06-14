@@ -19,6 +19,7 @@ const Player = ({
     const [isSold, setIsSold] = useState(false);
     const [owner, setOwner] = useState(curr_owner);
     const [isExpired, setIsExpired] = useState(false);
+    const [renderTimer, setRenderTimer] = useState(false);
 
     const clickHandler = async () => {
         //console.log(price);
@@ -51,23 +52,27 @@ const Player = ({
             }
         });
 
+        socket.on("start_timer", (data) => {
+            if (data.id === id) {
+                if (!renderTimer) {
+                    setRenderTimer(true);
+                }
+            }
+        });
+
         socket.on("timeout", (data) => {
             setIsExpired(true);
+            setRenderTimer(false);
         });
     }, [id]);
     const time = new Date();
-    time.setSeconds(time.getSeconds() + timeLeft);
+    time.setSeconds(time.getSeconds() + 60);
 
     return (
         <div className="player-card">
-            {!isExpired && (
+            {renderTimer && (
                 <div>
-                    {/* <Timer
-                        expiryTimestamp={time}
-                        id={id}
-                        userId={userId}
-                        userName={userName}
-                    /> */}
+                    {renderTimer && <Timer expiryTimestamp={time} id={id} />}
 
                     <div className="name cditem">{name}</div>
 
@@ -81,11 +86,15 @@ const Player = ({
                     </button>
                 </div>
             )}
-            {isExpired && (
+            {!renderTimer && (
                 <div>
                     <div className="name cditem">{name}</div>
                     <div className="curr-price cditem">
-                        sold to {owner} for {price} lacs
+                        Base Price : {price}
+                    </div>
+                    <br />
+                    <div className="name cditem">
+                        auction for this player will start soon
                     </div>
                 </div>
             )}

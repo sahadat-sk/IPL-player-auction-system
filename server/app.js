@@ -37,12 +37,14 @@ io.on("connection", (socket) => {
         //console.log(data);
         socket.broadcast.emit("timeout", data);
     });
-    socket.on("curr_time",(time)=>{
-        socket.broadcast.emit("change_curr_time",time);
-    })
-    socket.on("current_owner",(owner)=>{
-        console.log("current owner",owner);
-        socket.broadcast.emit("change_current_owner",owner);
-    }
-    )
+    socket.on("curr_time", (time) => {
+        socket.broadcast.emit("change_curr_time", time);
+    });
+    socket.on("current_owner", (owner) => {
+        //console.log("current owner",owner);
+        socket.broadcast.emit("change_current_owner", owner);
+    });
+    socket.on("start_auction", (id) => {
+        socket.broadcast.emit("start_timer", id);
+    });
 });

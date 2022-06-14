@@ -1,22 +1,15 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 import "./singupPage.css";
-import axios from "axios";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const LoginPage = () => {
-    const [username, setusername] = useState("");
-    const [password, setpassword] = useState("");
+const SignupPage = () => {
+    const [playername, setPlayername] = useState("");
+    const [basePrice, setBasePrice] = useState("");
 
     const navigate = useNavigate();
-
-    // useEffect(() => {
-    //     let userInfo = localStorage.getItem("userInfo");
-    //     if (userInfo) {
-    //         navigate("/mainpage");
-    //     }
-    // }, [navigate]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -27,21 +20,15 @@ const LoginPage = () => {
                 },
             };
             const { data } = await axios.post(
-                "/login",
+                "/mainpage/addplayer",
                 {
-                    teamName: username,
-                    password,
+                    name: playername,
+                    current_price: basePrice,
                 },
                 config
             );
-            console.log("USER INFO IS:  ", data);
-            localStorage.setItem("userInfo", JSON.stringify(data));
-            console.log(data.isAdmin);
-            if (data.isAdmin === true) {
-                navigate("/adminpage");
-            } else {
-                navigate("/mainpage");
-            }
+
+            navigate("/adminpage");
         } catch (error) {
             console.log(error);
         }
@@ -50,33 +37,34 @@ const LoginPage = () => {
     return (
         <div className="main">
             <form className="card-container" onSubmit={submitHandler}>
-                <h1 className="form-heading">LOGIN</h1>
+                <h1 className="form-heading">Add player</h1>
                 <label className="form-label">
-                    username:
+                    Playername:
                     <br />
                     <input
                         type="text"
                         name="name"
                         onChange={(e) => {
-                            setusername(e.target.value);
+                            setPlayername(e.target.value);
                         }}
                     />
                 </label>
                 <label className="form-label">
-                    password:
+                    Base price (in lacs):
                     <br />
                     <input
-                        type="password"
-                        name="password"
+                        type="number"
+                        name="price"
                         onChange={(e) => {
-                            setpassword(e.target.value);
+                            setBasePrice(e.target.value);
                         }}
                     />
                 </label>
-                <input className="button" type="submit" value="login" />
+                <input className="button" type="submit" value="Add" />
             </form>
+
         </div>
     );
 };
 
-export default LoginPage;
+export default SignupPage;
