@@ -10,9 +10,16 @@ const Player = ({ name, inprice, id, curr_status }) => {
     const [price, setPrice] = useState(inprice);
     const [isSold, setIsSold] = useState(curr_status === "sold" ? true : false);
 
-    const startAuctionHandler = ()=>{
+    const startAuctionHandler = () => {
         socket.emit("start_auction", { id });
-    }
+    };
+    useEffect(() => {
+        socket.on("timeout", (data) => {
+            if (data.id === id) {
+                setIsSold(true);
+            }
+        });
+    }, []);
 
     return (
         <div className="player-card admin-player-card">
@@ -21,8 +28,10 @@ const Player = ({ name, inprice, id, curr_status }) => {
                 Current Price(lac) : <br />
                 {price}
             </div>
-            <div className="status cditem">{curr_status}</div>
-            <button onClick={startAuctionHandler}>Start auction</button>
+            {isSold && <div className="status cditem">{curr_status}</div>}
+            {!isSold && (
+                <button onClick={startAuctionHandler}>Start auction</button>
+            )}
         </div>
     );
 };

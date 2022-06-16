@@ -16,27 +16,30 @@ const Player = ({
     timeLeft,
 }) => {
     const [price, setPrice] = useState(inprice);
-    const [isSold, setIsSold] = useState(false);
+    const [isSold, setIsSold] = useState(curr_owner === "none" ? false : true);
     const [owner, setOwner] = useState(curr_owner);
     const [isExpired, setIsExpired] = useState(false);
     const [renderTimer, setRenderTimer] = useState(false);
 
     const clickHandler = async () => {
         //console.log(price);
-        socket.emit("bid", { price, id });
-        const newPrice = price + 100;
-        setPrice(newPrice);
-        setIsSold(true);
-        const { data } = await axios.put("/mainpage", {
-            id,
-            price: newPrice,
-            userId,
-            userName,
-            prevUserId: curr_owner,
-        });
-        console.log("player data", data);
-        setOwner(userName);
-        socket.emit("current_owner", { owner: userName, id });
+        if (userName !== owner) {
+            socket.emit("bid", { price, id });
+            const newPrice = price + 100;
+            setPrice(newPrice);
+
+            const { data } = await axios.put("/mainpage", {
+                id,
+                price: newPrice,
+                userId,
+                userName,
+                prevUserId: curr_owner,
+            });
+            setIsSold(true);
+            console.log("player data", data);
+            setOwner(userName);
+            socket.emit("current_owner", { owner: userName, id });
+        }
     };
     useEffect(() => {
         socket.on("bid_inc", (data) => {
@@ -61,10 +64,12 @@ const Player = ({
         });
 
         socket.on("timeout", (data) => {
-            setIsExpired(true);
-            setRenderTimer(false);
+            if (data.id === id) {
+                setIsExpired(true);
+                setRenderTimer(false);
+            }
         });
-    }, [id]);
+    }, [id, renderTimer]);
     const time = new Date();
     time.setSeconds(time.getSeconds() + 60);
 
@@ -86,7 +91,17 @@ const Player = ({
                     </button>
                 </div>
             )}
-            {!renderTimer && (
+            {!renderTimer && isSold && (
+                <div>
+                    <div className="name cditem">{name}</div>
+                    <div className="curr-price cditem">
+                        Base Price : {price}
+                    </div>
+                    <br />
+                    <div className="name cditem">player sold to {owner}</div>
+                </div>
+            )}
+            {!renderTimer && !isExpired && !isSold && (
                 <div>
                     <div className="name cditem">{name}</div>
                     <div className="curr-price cditem">
@@ -96,6 +111,19 @@ const Player = ({
                     <div className="name cditem">
                         auction for this player will start soon
                     </div>
+                </div>
+            )}
+
+            {!renderTimer && !isSold && isExpired && (
+                <div>
+                    <div className="name cditem">{name}</div>
+                    <div className="curr-price cditem">
+                        Base Price : {price}
+                    </div>
+                    <br />
+                    {isExpired && (
+                        <div className="name cditem">The player was unsold</div>
+                    )}
                 </div>
             )}
         </div>

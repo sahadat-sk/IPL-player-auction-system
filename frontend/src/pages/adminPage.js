@@ -16,6 +16,7 @@ const MainPage = () => {
     const [userName, setUserName] = useState("");
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(new Date().setSeconds(60));
+    const [isSold,setIsSold] = useState(false);
 
     //time.setSeconds(time.getSeconds() + 60);
 
@@ -50,6 +51,7 @@ const MainPage = () => {
 
         socket.on("timeout", (data) => {
             setIsRunning(false);
+            setIsSold(true);
         });
 
         players();
