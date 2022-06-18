@@ -23,7 +23,12 @@ const Player = ({
 
     const clickHandler = async () => {
         //console.log(price);
-        if (userName !== owner) {
+        const currUserId = JSON.parse(localStorage.getItem("userInfo")).id;
+        console.log(localStorage.getItem("userInfo"));
+        const user = await axios.get("/user/" + currUserId);
+        if (user.data.currentMoney <= price) console.log("NOT ENOUGH MONEY",user.data.currentMoney);
+        if (userName !== owner && user.data.currentMoney >= price) {
+            //console.log("userData is ", user.data);
             socket.emit("bid", { price, id });
             const newPrice = price + 100;
             setPrice(newPrice);
@@ -35,8 +40,9 @@ const Player = ({
                 userName,
                 prevUserId: curr_owner,
             });
+
             setIsSold(true);
-            console.log("player data", data);
+
             setOwner(userName);
             socket.emit("current_owner", { owner: userName, id });
         }

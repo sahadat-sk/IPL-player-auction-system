@@ -32,6 +32,8 @@ const Player = ({ name, inprice, id, curr_status }) => {
             {!isSold && (
                 <button onClick={startAuctionHandler}>Start auction</button>
             )}
+            {/* //remove the line */}
+            <button onClick={startAuctionHandler}>Start auction</button>
         </div>
     );
 };

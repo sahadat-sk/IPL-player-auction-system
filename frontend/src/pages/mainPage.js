@@ -16,7 +16,7 @@ const MainPage = () => {
     const [userId, setUserId] = useState("");
     const [userName, setUserName] = useState("");
     const [isRunning, setIsRunning] = useState(true);
-    const [time,setTime] = useState((new Date()).setSeconds(60));
+    const [time,setTime] = useState((new Date()).setSeconds(6000));
     
     //time.setSeconds(time.getSeconds() + 60);
 

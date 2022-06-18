@@ -17,23 +17,23 @@ const mySchema = new mongoose.Schema(
             default: [],
         },
         currentMoney: {
-            type: String,
-            default: "50000000",
+            type: Number,
+            default: 1000,
         },
         isAdmin: {
             type: Boolean,
             default: false,
-        }
+        },
     },
     {
         timestamps: true,
     }
 );
 
-mySchema.methods.verify = async function (password){
-    console.log(password,this.password);
-    return await bcrypt.compare(password,this.password);
-}
+mySchema.methods.verify = async function (password) {
+    console.log(password, this.password);
+    return await bcrypt.compare(password, this.password);
+};
 
 mySchema.pre("save", async function (next) {
     if (!this.isModified("password")) {

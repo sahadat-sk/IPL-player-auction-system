@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { createUser, authUser } from "../controllers/userControllers.js";
+import { createUser, authUser ,getUser} from "../controllers/userControllers.js";
 import { protect } from "../middlewares/authmiddleware.js";
 import {playerController,playerUpdater,addPlayer} from "../controllers/playerController.js";
 
@@ -12,6 +12,7 @@ router.post("/login", authUser);
 router.get("/mainpage", playerController);
 router.put("/mainpage", playerUpdater);
 router.post("/mainpage/addplayer",addPlayer);
+router.get("/user/:id",getUser);
 //router.put("/mainpage/updtime",updateTime);
 
 export default router;
