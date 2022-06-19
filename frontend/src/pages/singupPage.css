@@ -1,40 +1,60 @@
 .card-container {
-    background-color: #444444;
+    background-color: none;
     border-radius: 2%;
-    height: 70vh;
-    width: 50vw;
+    height: 100%;
+    width: 35%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: left;
+    gap:2rem;
     align-items: center;
+    margin:2rem;
+    margin:3.5rem;
 }
-.form-label{
+.form-label {
     color: whitesmoke;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    width: 100%;
+    font-weight: 50;
 }
-.form-heading{
+.form-heading {
     font-size: 4rem;
-    color: #EDEDED;
+    color: #ededed;
+    font-weight: 26;
 }
 .main {
-    height: 100vh;
+   height: 100vh;
+  width: 100%;
+  background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/redTheme.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  gap: 2rem;
+}
+.login {
     width: 100%;
-    background-color: #171717;
-  
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+    margin-top:2rem;
+}
+.input{
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid whitesmoke;
+    width: 100%;
+    color: whitesmoke;
 }
 .players {
     display: flex;
     height: 100%;
     width: 100%;
-   
+
     align-items: center;
     justify-content: center;
-    
+
     flex-wrap: wrap;
     overflow: scroll;
 }
@@ -42,11 +62,10 @@
     display: inline;
     width: 100%;
     overflow: scroll;
-    
 }
 .player-card {
     height: 20rem;
-    width: 15rem;
+    width:20%;
     background-color: yellow;
     border-radius: 1%;
     display: flex;
@@ -54,29 +73,33 @@
     justify-content: center;
     align-items: center;
 }
-.check{
+.check {
     font-size: 1.5rem;
     color: whitesmoke;
+    font-weight: 15;
 }
-.checkbox{
+.checkbox {
     width: 1.5rem;
     height: 1.5rem;
     margin-left: 1rem;
+    background: none;
+    border:none;
+    outline:none;
 }
-.bid{
-  background-color: red;
+.bid {
+    background-color: red;
 }
-.admin-main{
+.admin-main {
     display: flex;
     flex-direction: column;
 }
-.main-header{
+.main-header {
     font-size: 3rem;
-    color: #EDEDED;
+    color: #ededed;
 }
-.add-btn{
+.add-btn {
     padding: 1rem;
-    margin-bottom:5rem;
+    margin-bottom: 5rem;
     height: 4rem;
     width: 9rem;
 }

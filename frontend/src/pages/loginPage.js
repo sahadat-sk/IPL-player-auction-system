@@ -50,30 +50,35 @@ const LoginPage = () => {
     return (
         <div className="main">
             <form className="card-container" onSubmit={submitHandler}>
-                <h1 className="form-heading">LOGIN</h1>
+                <h1 className="form-heading">Log In</h1>
+                <div className="subtitle">Welcome back  : ) </div>
                 <label className="form-label">
-                    username:
+                    User name
                     <br />
                     <input
                         type="text"
                         name="name"
+                        className="input"
+                        autoComplete="off"
                         onChange={(e) => {
                             setusername(e.target.value);
                         }}
                     />
                 </label>
                 <label className="form-label">
-                    password:
+                    Password
                     <br />
                     <input
                         type="password"
                         name="password"
+                        className="input"
+                        autoComplete="off"
                         onChange={(e) => {
                             setpassword(e.target.value);
                         }}
                     />
                 </label>
-                <input className="button" type="submit" value="login" />
+                <input className="button login" type="submit" value="Log In" />
             </form>
         </div>
     );

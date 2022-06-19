@@ -53,31 +53,34 @@ const SignupPage = () => {
     return (
         <div className="main">
             <form className="card-container" onSubmit={submitHandler}>
-                <h1 className="form-heading">SIGN UP</h1>
+                <h1 className="form-heading">Sign Up</h1>
+                <div className="subtitle">and start bidding.. </div>
                 <label className="form-label">
-                    username:
+                    User name
                     <br />
                     <input
                         type="text"
                         name="name"
+                        className="input"
                         onChange={(e) => {
                             setusername(e.target.value);
                         }}
                     />
                 </label>
                 <label className="form-label">
-                    password:
+                    Password:
                     <br />
                     <input
                         type="password"
                         name="password"
+                        className="input"
                         onChange={(e) => {
                             setpassword(e.target.value);
                         }}
                     />
                 </label>
                 <label className="check">
-                    Admin user ? 
+                    Are you an Admin ?
                     <input
                         type="checkbox"
                         id="topping"
@@ -88,7 +91,7 @@ const SignupPage = () => {
                         className="checkbox"
                     />
                 </label>
-                <input className="button" type="submit" value="signup" />
+                <input className="button login" type="submit" value="Sign Up" />
             </form>
         </div>
     );

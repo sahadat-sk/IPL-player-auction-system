@@ -5,10 +5,13 @@ const landingPage = () => {
     return (
         <>
             <div className="landing-page">
-                <div className="title">IPL Player auction system</div>
+                <div className="landing-page-header">
+                    <div className="title">IPL Player auction system</div>
+                    <div className="subtitle">Let's make a bid </div>
+                </div>
                 <div className="auth">
                     <Link to="/signup">
-                        <div className="button">signup</div>
+                        <button className="button">signup</button>
                     </Link>
                     <Link to="/login">
                         <div className="button">login</div>

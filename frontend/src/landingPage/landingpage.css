@@ -1,49 +1,71 @@
-.landing-page{
-  height: 100vh;
-  width: 100%;
-  background-color: #000000;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+.landing-page {
+    height: 100vh;
+    width: 100%;
+    background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/redTheme.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    gap: 2rem;
 }
-.title{
-  width: 80%;
-  height: 100%;
-  font-size:8rem;
-  color: whitesmoke;
-  padding: 2rem;
+.landing-page-header {
+    width: 50%;
+    margin: 2rem;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
 }
-.auth{
-  width: 20%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap:2rem;
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: 15;
+    color: #fff;
+    text-align: left;
 }
-.button{
-  height: 3rem;
-  width: 7rem;
-  font-size: 1.4rem;
-  background-color: #FF0000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: antiquewhite;
-  border-radius: 5%;
-  text-decoration: none;
+.title {
+    width: 100%;
+    height: 100%;
+    font-size: 5rem;
+    color: whitesmoke;
+    padding: 0rem;
 }
-.button:hover{
-  /* height: 3rem;
+.auth {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    margin-top: 2rem;
+    margin-left: 3rem;
+    align-items: left;
+    justify-content: left;
+    gap: 2rem;
+}
+.button {
+    height: 3rem;
+    width: 7rem;
+    font-size: 1.4rem;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #393939;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    transition: transform 0.45s ease;
+}
+.button:hover {
+    transform: scale(1.05);
+}
+.button:hover {
+    /* height: 3rem;
   width: 7rem;
   font-size: 1.4rem; */
-  background-color: #ff4040;
-  /* display: flex;
+    background-color: #ff0000;
+    box-shadow: #393939;
+    color: whitesmoke;
+    /* display: flex;
   align-items: center;
   justify-content: center;
   color: antiquewhite;

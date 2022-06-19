@@ -1,8 +1,9 @@
 .player-card {
     background-color: #565656;
+    
     height: 30rem;
     width: 20rem;
-    border-radius: 1%;
+    border-radius: 1rem;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -10,6 +11,10 @@
     margin-left:2rem;
     align-items: center;
     padding: 1rem;
+    transition: color 0.5s ease, transform .4s ease;
+}
+.player-card:hover{
+    transform: scale(1.1);
 }
 .admin-player-card{
     background-color: #565656;
