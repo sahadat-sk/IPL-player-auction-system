@@ -26,7 +26,8 @@ const Player = ({
         const currUserId = JSON.parse(localStorage.getItem("userInfo")).id;
         console.log(localStorage.getItem("userInfo"));
         const user = await axios.get("/user/" + currUserId);
-        if (user.data.currentMoney <= price) console.log("NOT ENOUGH MONEY",user.data.currentMoney);
+        if (user.data.currentMoney <= price)
+            console.log("NOT ENOUGH MONEY", user.data.currentMoney);
         if (userName !== owner && user.data.currentMoney >= price) {
             //console.log("userData is ", user.data);
             socket.emit("bid", { price, id });
@@ -77,23 +78,23 @@ const Player = ({
         });
     }, [id, renderTimer]);
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 60);
+    time.setSeconds(time.getSeconds() + 6000);
 
     return (
-        <div className="player-card">
+        <div className="player-card pl-blur ">
             {renderTimer && (
                 <div>
-                    {renderTimer && <Timer expiryTimestamp={time} id={id} />}
 
                     <div className="name cditem">{name}</div>
+                    {renderTimer && <Timer expiryTimestamp={time} id={id} />}
 
-                    <div className="name cditem">owner: {owner}</div>
+                    <div className="owner cditem">current bidder {owner}</div>
                     <div className="curr-price cditem">
-                        Current Price(lac) : <br />
-                        {price}
+                        Current Price<br />
+                        <div className="price">{price} lacs</div>
                     </div>
-                    <button className="bid cditem" onClick={clickHandler}>
-                        Bid on {name}
+                    <button className="button bid-button" onClick={clickHandler}>
+                        Bid 
                     </button>
                 </div>
             )}
@@ -101,20 +102,25 @@ const Player = ({
                 <div>
                     <div className="name cditem">{name}</div>
                     <div className="curr-price cditem">
-                        Base Price : {price}
+                        Player sold for <br />
+                        <div className="price">{price} lacs</div>
                     </div>
                     <br />
-                    <div className="name cditem">player sold to {owner}</div>
+                    <div className="cditem">
+                        Sold to
+                        <div className="price">{owner}</div>
+                    </div>
                 </div>
             )}
             {!renderTimer && !isExpired && !isSold && (
                 <div>
                     <div className="name cditem">{name}</div>
                     <div className="curr-price cditem">
-                        Base Price : {price}
+                        Base Price <br />
+                        <div className="price">{price} lacs</div>
                     </div>
                     <br />
-                    <div className="name cditem">
+                    <div className="cditem">
                         auction for this player will start soon
                     </div>
                 </div>
@@ -128,7 +134,7 @@ const Player = ({
                     </div>
                     <br />
                     {isExpired && (
-                        <div className="name cditem">The player was unsold</div>
+                        <div className="cditem">The player was unsold</div>
                     )}
                 </div>
             )}

@@ -6,10 +6,10 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-    gap:2rem;
+    gap: 2rem;
     align-items: center;
-    margin:2rem;
-    margin:3.5rem;
+    margin: 2rem;
+    margin: 3.5rem;
 }
 .form-label {
     color: whitesmoke;
@@ -23,23 +23,23 @@
     font-weight: 26;
 }
 .main {
-   height: 100vh;
-  width: 100%;
-  background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/redTheme.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  gap: 2rem;
+    height: 100vh;
+    width: 100%;
+    background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/redTheme.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    gap: 2rem;
 }
 .login {
     width: 100%;
-    margin-top:2rem;
+    margin-top: 2rem;
 }
-.input{
+.input {
     background: none;
     border: none;
     outline: none;
@@ -65,7 +65,7 @@
 }
 .player-card {
     height: 20rem;
-    width:20%;
+    width: 20%;
     background-color: yellow;
     border-radius: 1%;
     display: flex;
@@ -83,8 +83,8 @@
     height: 1.5rem;
     margin-left: 1rem;
     background: none;
-    border:none;
-    outline:none;
+    border: none;
+    outline: none;
 }
 .bid {
     background-color: red;
@@ -102,4 +102,21 @@
     margin-bottom: 5rem;
     height: 4rem;
     width: 9rem;
+}
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.blur{
+     background: #4c1523ae;
+    backdrop-filter: blur(8px);
+}
+.mp-heading{
+    margin-left: 2rem;
+    width: 100%;
+    font-weight: 70;
+}
+.mp-button{
+    margin-right: 2rem;
 }

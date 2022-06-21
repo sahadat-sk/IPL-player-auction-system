@@ -8,7 +8,6 @@ import io from "socket.io-client";
 import axios from "axios";
 const socket = io("http://127.0.0.1:5000");
 
-
 //const socket = io("http://127.0.0.1:5000");
 
 const MainPage = () => {
@@ -16,8 +15,8 @@ const MainPage = () => {
     const [userId, setUserId] = useState("");
     const [userName, setUserName] = useState("");
     const [isRunning, setIsRunning] = useState(true);
-    const [time,setTime] = useState((new Date()).setSeconds(6000));
-    
+    const [time, setTime] = useState(new Date().setSeconds(6000));
+
     //time.setSeconds(time.getSeconds() + 60);
 
     const navigate = useNavigate();
@@ -35,37 +34,34 @@ const MainPage = () => {
         setUserId(info.id);
         setUserName(info.teamName);
 
-        socket.emit("curr_time",{time});
-        socket.on("change_curr_time",(data)=>{
-            if(isRunning)
-            setTime(data.time);
-            else
-            setTime(0);
+        socket.emit("curr_time", { time });
+        socket.on("change_curr_time", (data) => {
+            if (isRunning) setTime(data.time);
+            else setTime(0);
         });
-
-        
 
         socket.on("timeout", (data) => {
             setIsRunning(false);
-        })
-
-
+        });
 
         players();
-    }, [navigate,isRunning,time]);
+    }, [navigate, isRunning, time]);
 
     // const time = new Date();
 
     return (
         <div className="main">
-            <div
-                className="button"
-                onClick={() => {
-                    localStorage.removeItem("userInfo");
-                    navigate("/");
-                }}
-            >
-                logout
+            <div className="heading blur ">
+                <div className="title mp-heading">Available Players</div>
+                <div
+                    className="button mp-button"
+                    onClick={() => {
+                        localStorage.removeItem("userInfo");
+                        navigate("/");
+                    }}
+                >
+                    logout
+                </div>
             </div>
             {/* <Timer expiryTimestamp={time} /> */}
             <div className="players">
