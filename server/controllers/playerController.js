@@ -60,7 +60,16 @@ const addPlayer = async (req, res) => {
         throw new Error("player not found");
     }
 };
+const getPlayer = async (req, res) => {
+    const player = await Player.findById(req.params.id);
+    console.log(player);
+    if (player) res.status(201).json(player);
+    else throw new Error("Player not found");
+};
 
+const updateTime = async (id, time) => {
+    const player = await Player.findByIdAndUpdate(id, { expires_on: time });
+};
 // const updateTime = async (req, res) => {
 //     const { id, sec, min } = req.body;
 //     //console.log(id,min);
@@ -79,4 +88,4 @@ const addPlayer = async (req, res) => {
 //     }
 // };
 
-export { playerController, playerUpdater, addPlayer };
+export { playerController, playerUpdater, addPlayer, getPlayer, updateTime };

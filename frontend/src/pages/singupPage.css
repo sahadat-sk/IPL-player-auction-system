@@ -120,3 +120,15 @@
 .mp-button{
     margin-right: 2rem;
 }
+.currMoney{
+    text-align: right;
+    margin-right: 2rem;
+    font-size: 2rem;
+    color:whitesmoke;
+}
+.playersBought{
+    text-align: left;
+    margin-left: 2rem;
+    font-size: 1.5rem;
+    color:whitesmoke;
+}

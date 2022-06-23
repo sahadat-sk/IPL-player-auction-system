@@ -11,7 +11,10 @@ const Player = ({ name, inprice, id, curr_status }) => {
     const [isSold, setIsSold] = useState(curr_status === "sold" ? true : false);
 
     const startAuctionHandler = () => {
-        socket.emit("start_auction", { id });
+         const time = new Date();
+         time.setSeconds(time.getSeconds() + 600);
+         console.log("time given : ",time);
+         socket.emit("start_auction", { id, timeLeft: time});
     };
     useEffect(() => {
         socket.on("timeout", (data) => {

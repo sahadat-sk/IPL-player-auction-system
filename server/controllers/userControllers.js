@@ -71,4 +71,11 @@ const authUser = asyncHandler(async (req, res) => {
         throw new Error("USER NOT FOUND");
     }
 });
-export { createUser, authUser, getUser };
+
+const getPlayers = async (req, res) => {
+    let user = await User.findById(req.params.id);
+    if (user) res.status(201).json(user.playersBought);
+    else throw new Error("User not found");
+};
+
+export { createUser, authUser, getUser, getPlayers };

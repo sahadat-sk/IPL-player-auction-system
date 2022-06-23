@@ -16,6 +16,9 @@ const MainPage = () => {
     const [userName, setUserName] = useState("");
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(new Date().setSeconds(6000));
+    const [currMoney, setCurrMoney] = useState(
+        JSON.parse(localStorage.getItem("userInfo")).currentMoney
+    );
 
     //time.setSeconds(time.getSeconds() + 60);
 
@@ -63,6 +66,10 @@ const MainPage = () => {
                     logout
                 </div>
             </div>
+            <div className="playersBought" onClick={()=>{
+                navigate("/playersBought")
+            }}>My Players</div>
+            <div className="currMoney ">user: {userName} Current Money {currMoney}</div>
             {/* <Timer expiryTimestamp={time} /> */}
             <div className="players">
                 {/* <Player name="dhoni" inprice={10} id="1"></Player>
@@ -79,7 +86,7 @@ const MainPage = () => {
                             userId={userId}
                             userName={userName}
                             curr_owner={player.curr_owner}
-                            timeLeft={player.time_left}
+                            timeLeft={player.expires_on}
                         ></Player>
                     );
                 })}

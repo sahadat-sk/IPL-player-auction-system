@@ -20,9 +20,13 @@ const mySchema = new mongoose.Schema({
         type: "string",
         default: "none",
     },
-    time_left: {
-        type: "number",
-        default: 60*60*1000,
+    expires_on: {
+        type: "object",
+        default:{}
+    },
+    is_auc_running: {
+        type: "boolean",
+        default: false
     }
 });
 

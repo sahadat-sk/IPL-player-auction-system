@@ -5,6 +5,7 @@ import connectDb from "./config/db.js";
 import userRouter from "./routes/userRoutes.js";
 import { Server } from "socket.io";
 import cors from "cors";
+import { updateTime } from "./controllers/playerController.js";
 //connecting to the databse
 connectDb();
 
@@ -44,7 +45,13 @@ io.on("connection", (socket) => {
         //console.log("current owner",owner);
         socket.broadcast.emit("change_current_owner", owner);
     });
-    socket.on("start_auction", (id) => {
-        socket.broadcast.emit("start_timer", id);
+    socket.on("start_auction", (data) => {
+        //update time id db
+        async function updTime() {
+            await updateTime(data.id, data.timeLeft);
+        }
+        //console.log(data.timeLeft+60);
+        updTime();
+        socket.broadcast.emit("start_timer", data);
     });
 });

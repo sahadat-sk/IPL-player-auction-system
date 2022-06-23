@@ -20,7 +20,9 @@ const Player = ({
     const [owner, setOwner] = useState(curr_owner);
     const [isExpired, setIsExpired] = useState(false);
     const [renderTimer, setRenderTimer] = useState(false);
+    const [time, setTime] = useState(Date.parse(timeLeft));
 
+    console.log("timeLeft is ",Date.parse(timeLeft));
     const clickHandler = async () => {
         //console.log(price);
         const currUserId = JSON.parse(localStorage.getItem("userInfo")).id;
@@ -49,6 +51,9 @@ const Player = ({
         }
     };
     useEffect(() => {
+        if(!isExpired){
+            setRenderTimer(true);
+        }
         socket.on("bid_inc", (data) => {
             // console.log(data);
             if (data.id === id) {
@@ -66,6 +71,12 @@ const Player = ({
             if (data.id === id) {
                 if (!renderTimer) {
                     setRenderTimer(true);
+                    let time = data.timeLeft;
+                    console.log("time Left : ", Date.parse(time));
+                    //time.setSeconds(time.getSeconds() + 600);
+                    //console.log("time Left 2 : ", time);
+
+                    setTime(Date.parse(time));
                 }
             }
         });
@@ -77,24 +88,27 @@ const Player = ({
             }
         });
     }, [id, renderTimer]);
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + 6000);
+    // const time = new Date();
+    // time.setSeconds(time.getSeconds() + 6000);
 
     return (
         <div className="player-card pl-blur ">
             {renderTimer && (
                 <div>
-
                     <div className="name cditem">{name}</div>
                     {renderTimer && <Timer expiryTimestamp={time} id={id} />}
 
                     <div className="owner cditem">current bidder {owner}</div>
                     <div className="curr-price cditem">
-                        Current Price<br />
+                        Current Price
+                        <br />
                         <div className="price">{price} lacs</div>
                     </div>
-                    <button className="button bid-button" onClick={clickHandler}>
-                        Bid 
+                    <button
+                        className="button bid-button"
+                        onClick={clickHandler}
+                    >
+                        Bid
                     </button>
                 </div>
             )}
