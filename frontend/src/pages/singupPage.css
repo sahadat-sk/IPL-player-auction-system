@@ -20,12 +20,12 @@
 .form-heading {
     font-size: 4rem;
     color: #ededed;
-    font-weight: 26;
+    font-weight: 50;
 }
 .main {
     height: 100vh;
     width: 100%;
-    background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/redTheme.png");
+    background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/colorful-abstract-nebula-space-background.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: absolute;
@@ -109,8 +109,8 @@
     align-items: center;
 }
 .blur{
-     background: #4c1523ae;
-    backdrop-filter: blur(8px);
+     background: transparent;
+    /* backdrop-filter: blur(0px); */
 }
 .mp-heading{
     margin-left: 2rem;

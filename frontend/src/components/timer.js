@@ -5,7 +5,7 @@ import io from "socket.io-client";
 
 const socket = io("http://127.0.0.1:5000");
 
-const MyTimer = ({ expiryTimestamp,id }) => {
+const MyTimer = ({ expiryTimestamp,id ,owner,price,isSold}) => {
     const [sec,setSec] = useState(0);
     const [min,setMin] = useState(0);
     const {
@@ -21,7 +21,8 @@ const MyTimer = ({ expiryTimestamp,id }) => {
     } = useTimer({
         expiryTimestamp,
         onExpire: () => {
-            socket.emit("exp", {id});
+            socket.emit("exp", {id,owner,price,isSold});
+            //socket.emit("reduce_money", {userId,price});
         },
     });
     useEffect(() => {

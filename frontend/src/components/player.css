@@ -14,7 +14,7 @@
     transition: color 0.5s ease, transform 0.4s ease;
 }
 .player-card:hover {
-    transform: scale(1.1);
+    transform: scale(1.03);
 }
 .admin-player-card {
     background-color: #565656;
@@ -41,7 +41,8 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     border: 3px solid whitesmoke;
-    background: #4c1523ae;
+    /* background: #4c1523ae; */
+    background: transparent;
     backdrop-filter: blur(10px);
     transform-style: preserve-3d;
     transition: 0.35s;
@@ -53,6 +54,7 @@
     text-align: center;
     font-size: 3rem;
     margin-bottom: 2rem;
+    font-weight: 300;
 }
 .price {
     font-size: 2.5rem;

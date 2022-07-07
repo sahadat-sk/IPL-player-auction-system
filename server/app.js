@@ -6,6 +6,7 @@ import userRouter from "./routes/userRoutes.js";
 import { Server } from "socket.io";
 import cors from "cors";
 import { updateTime } from "./controllers/playerController.js";
+import { updateUserMoney } from "./controllers/userControllers.js";
 //connecting to the databse
 connectDb();
 
@@ -36,6 +37,16 @@ io.on("connection", (socket) => {
     });
     socket.on("exp", (data) => {
         //console.log(data);
+        async function updateMoney() {
+            await updateUserMoney(data.userId, data.price);
+        }
+        if (data.isSold) {
+            let newMoney = updateMoney();
+            socket.broadcast.emit("change_money", {
+                newMoney,
+                userId: data.userId,
+            });
+        }
         socket.broadcast.emit("timeout", data);
     });
     socket.on("curr_time", (time) => {
@@ -53,5 +64,9 @@ io.on("connection", (socket) => {
         //console.log(data.timeLeft+60);
         updTime();
         socket.broadcast.emit("start_timer", data);
+    });
+    socket.on("change_user_money", (data) => {
+        console.log(data);
+        socket.broadcast.emit("change_money", data);
     });
 });

@@ -25,7 +25,7 @@ const Player = ({ name, inprice, id, curr_status }) => {
     }, []);
 
     return (
-        <div className="player-card admin-player-card">
+        <div className="player-card admin-player-card pl-blur">
             <div className="name cditem">{name}</div>
             <div className="curr-price cditem">
                 Current Price(lac) : <br />
@@ -33,10 +33,10 @@ const Player = ({ name, inprice, id, curr_status }) => {
             </div>
             {isSold && <div className="status cditem">{curr_status}</div>}
             {!isSold && (
-                <button onClick={startAuctionHandler}>Start auction</button>
+                <button  className="button" onClick={startAuctionHandler}>Start </button>
             )}
             {/* //remove the line */}
-            <button onClick={startAuctionHandler}>Start auction</button>
+            <button className="button" onClick={startAuctionHandler}>Start </button>
         </div>
     );
 };

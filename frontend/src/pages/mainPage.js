@@ -46,7 +46,16 @@ const MainPage = () => {
         socket.on("timeout", (data) => {
             setIsRunning(false);
         });
-
+        socket.on("change_money", (data) => {
+            console.log("data is ", data);
+            if (data.id === userId) {
+                console.log(data);
+                setCurrMoney(data.price);
+                let user = JSON.parse(localStorage.getItem("userInfo"));
+                user.currMoney = data.price;
+                localStorage.setItem("userInfo", JSON.stringify(user));
+            }
+        });
         players();
     }, [navigate, isRunning, time]);
 
@@ -66,10 +75,15 @@ const MainPage = () => {
                     logout
                 </div>
             </div>
-            <div className="playersBought" onClick={()=>{
-                navigate("/playersBought")
-            }}>My Players</div>
-            <div className="currMoney ">user: {userName} Current Money {currMoney}</div>
+            {/* <div
+                className="playersBought"
+                onClick={() => {
+                    navigate("/playersBought");
+                }}
+            >
+                My Players
+            </div> */}
+            <div className="currMoney ">Available money : {currMoney}</div>
             {/* <Timer expiryTimestamp={time} /> */}
             <div className="players">
                 {/* <Player name="dhoni" inprice={10} id="1"></Player>
@@ -87,6 +101,7 @@ const MainPage = () => {
                             userName={userName}
                             curr_owner={player.curr_owner}
                             timeLeft={player.expires_on}
+                            isRunning={player.is_auc_running}
                         ></Player>
                     );
                 })}

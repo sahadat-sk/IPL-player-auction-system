@@ -4,23 +4,34 @@ import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import generateToken from "../util/generateToken.js";
 
-const getUser = asyncHandler(async (req, res) => {
-    console.log("id is ", req.params.id);
-    let user = await User.findById(req.params.id);
-    let newMoney = user.currentMoney - 100;
-    if (newMoney < 0) {
-        newMoney = 0;
-    }
-    await User.findByIdAndUpdate(req.params.id, { currentMoney: newMoney });
-    user.currentMoney = newMoney;
-    //console.log(user);
+// const getUser = asyncHandler(async (req, res) => {
+//     console.log("id is ", req.params.id);
+//     let user = await User.findById(req.params.id);
+//     let newMoney = user.currentMoney - 100;
+//     if (newMoney < 0) {
+//         newMoney = 0;
+//     }
+//     await User.findByIdAndUpdate(req.params.id, { currentMoney: newMoney });
+//     user.currentMoney = newMoney;
+//     //console.log(user);
+//     if (user) {
+//         res.status(201).json(user);
+//     } else {
+//         res.status(400);
+//         throw new Error("user not found");
+//     }
+// });
+const updateUserMoney = async (userId, price) => {
+    let user = await User.findById(userId);
     if (user) {
-        res.status(201).json(user);
-    } else {
-        res.status(400);
-        throw new Error("user not found");
+        let newMoney = user.currentMoney - price;
+        if (newMoney < 0) {
+            return;
+        }
+        await User.findByIdAndUpdate(userId, { currentMoney: newMoney });
+        return newMoney;
     }
-});
+};
 
 //for creating a new user
 const createUser = asyncHandler(async (req, res) => {
@@ -78,4 +89,4 @@ const getPlayers = async (req, res) => {
     else throw new Error("User not found");
 };
 
-export { createUser, authUser, getUser, getPlayers };
+export { createUser, authUser, updateUserMoney };
