@@ -14,7 +14,7 @@ const Player = ({
     userName,
     curr_owner,
     timeLeft,
-    isRunning
+    isRunning,
 }) => {
     const [price, setPrice] = useState(inprice);
     const [isSold, setIsSold] = useState(curr_owner === "none" ? false : true);
@@ -26,11 +26,15 @@ const Player = ({
     //console.log("timeLeft is ", Date.parse(timeLeft));
     const clickHandler = async () => {
         //console.log(price);
-        const currUserId = JSON.parse(localStorage.getItem("userInfo")).id;
-        const currMoney = JSON.parse(
-            localStorage.getItem("userInfo")
-        ).currentMoney;
-        console.log(currMoney);
+
+        //method 1 #refresh does not work
+        // const currUserId = JSON.parse(localStorage.getItem("userInfo")).id;
+        // const currMoney = JSON.parse(
+        //     localStorage.getItem("userInfo")
+        // ).currentMoney;
+        // console.log(currMoney);
+
+        //not logical
         // let user = null;
         // if (currMoney >= price) {
         //      user = await axios.get("/user/" + currUserId);
@@ -41,6 +45,11 @@ const Player = ({
         // }
         // if (user.data.currentMoney <= price)
         //     console.log("NOT ENOUGH MONEY", user.data.currentMoney);
+
+        let {data} = await axios.get("/user/" + userId);
+        //console.log("User is",data.currentMoney);
+        let currMoney = data.currentMoney;
+        //currMoney = 100000; //for testing
         if (userName !== owner && currMoney >= price) {
             //console.log("userData is ", user.data);
             socket.emit("bid", { price, id });
@@ -56,13 +65,18 @@ const Player = ({
             });
 
             setIsSold(true);
-            let user = JSON.parse(localStorage.getItem("userInfo"));
-            user.currMoney = user.currentMoney - price;
+            // let user = JSON.parse(localStorage.getItem("userInfo"));
+            // user.currMoney = user.currentMoney - price;
             // localStorage.setItem("userInfo", JSON.stringify(user));
 
             setOwner(userName);
             socket.emit("current_owner", { owner: userName, id });
-            socket.emit("change_user_money", {id:userId, price: user.currMoney});
+            console.log("current Money", currMoney, price);
+            socket.emit("change_user_money", {
+                id: userId,
+                price: currMoney - price,
+            });
+            socket.emit("change_prev_user_money",{id:owner,price:price-100});
         }
     };
     useEffect(() => {
@@ -89,7 +103,7 @@ const Player = ({
                 if (!renderTimer) {
                     setRenderTimer(true);
                     let time = data.timeLeft;
-                    console.log("time Left : ", Date.parse(time));
+                   // console.log("time Left : ", Date.parse(time));
                     //time.setSeconds(time.getSeconds() + 600);
                     //console.log("time Left 2 : ", time);
 
@@ -123,7 +137,15 @@ const Player = ({
             {renderTimer && (
                 <div>
                     <div className="name cditem">{name}</div>
-                    {renderTimer && <Timer expiryTimestamp={time} id={id} owner={owner} price={price} isSold={isSold} />}
+                    {renderTimer && (
+                        <Timer
+                            expiryTimestamp={time}
+                            id={id}
+                            owner={owner}
+                            price={price}
+                            isSold={isSold}
+                        />
+                    )}
 
                     <div className="owner cditem">current bidder {owner}</div>
                     <div className="curr-price cditem">

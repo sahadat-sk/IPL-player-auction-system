@@ -21,11 +21,11 @@ const playerUpdater = async (req, res) => {
         current_price: price,
         curr_status: "sold",
         curr_owner: userName,
-        is_auc_running: true
+        is_auc_running: true,
     });
     const user = await User.findById(userId);
     const prevUser = await User.findOne({ name: prevUserId });
-
+    
     const newBoughtArr = user.playersBought;
     if (!newBoughtArr.includes(id)) {
         newBoughtArr.push(id);
@@ -69,7 +69,10 @@ const getPlayer = async (req, res) => {
 };
 
 const updateTime = async (id, time) => {
-    const player = await Player.findByIdAndUpdate(id, { expires_on: time,is_auc_running:true });
+    const player = await Player.findByIdAndUpdate(id, {
+        expires_on: time,
+        is_auc_running: true,
+    });
 };
 // const updateTime = async (req, res) => {
 //     const { id, sec, min } = req.body;

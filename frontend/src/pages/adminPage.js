@@ -63,7 +63,7 @@ const MainPage = () => {
         <div className="main admin-main">
             <div className="main-header">ADMIN PAGE!!</div>
             <div
-                className="button"
+                className="button mp-button"
                 onClick={() => {
                     localStorage.removeItem("userInfo");
                     navigate("/");

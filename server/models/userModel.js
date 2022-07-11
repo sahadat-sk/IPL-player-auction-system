@@ -16,9 +16,13 @@ const mySchema = new mongoose.Schema(
             type: Array,
             default: [],
         },
+        money:{
+            type: Number,
+            default: 1000
+        },
         currentMoney: {
             type: Number,
-            default: 1000,
+            default: 10000,
         },
         isAdmin: {
             type: Boolean,

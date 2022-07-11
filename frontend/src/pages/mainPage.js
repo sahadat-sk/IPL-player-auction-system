@@ -30,12 +30,18 @@ const MainPage = () => {
             navigate("/login");
         }
         const players = async () => {
-            const { data } = await axios.get("/mainpage");
+            let { data } = await axios.get("/mainpage");
             setPlayers(data);
+            
         };
+        const userMoney = async() =>{
+            let { data } = await axios.get("/user/" + userId);
+            setCurrMoney(data.currentMoney);
+        }
         const info = JSON.parse(localStorage.getItem("userInfo"));
         setUserId(info.id);
         setUserName(info.teamName);
+        userMoney();
 
         socket.emit("curr_time", { time });
         socket.on("change_curr_time", (data) => {
@@ -49,11 +55,11 @@ const MainPage = () => {
         socket.on("change_money", (data) => {
             console.log("data is ", data);
             if (data.id === userId) {
-                console.log(data);
+                console.log("price to be set", data.price);
                 setCurrMoney(data.price);
-                let user = JSON.parse(localStorage.getItem("userInfo"));
-                user.currMoney = data.price;
-                localStorage.setItem("userInfo", JSON.stringify(user));
+            } else if (data.id === userName) {
+                //setCurrMoney(currMoney + data.price);
+                userMoney();
             }
         });
         players();

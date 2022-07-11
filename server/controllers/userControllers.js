@@ -4,23 +4,16 @@ import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import generateToken from "../util/generateToken.js";
 
-// const getUser = asyncHandler(async (req, res) => {
-//     console.log("id is ", req.params.id);
-//     let user = await User.findById(req.params.id);
-//     let newMoney = user.currentMoney - 100;
-//     if (newMoney < 0) {
-//         newMoney = 0;
-//     }
-//     await User.findByIdAndUpdate(req.params.id, { currentMoney: newMoney });
-//     user.currentMoney = newMoney;
-//     //console.log(user);
-//     if (user) {
-//         res.status(201).json(user);
-//     } else {
-//         res.status(400);
-//         throw new Error("user not found");
-//     }
-// });
+const getUser = asyncHandler(async (req, res) => {
+    //console.log("id is ", req.params.id);
+    let user = await User.findById(req.params.id);
+    if (user) {
+        res.status(201).json(user);
+    } else {
+        res.status(400);
+        throw new Error("user not found");
+    }
+});
 const updateUserMoney = async (userId, price) => {
     let user = await User.findById(userId);
     if (user) {
@@ -89,4 +82,19 @@ const getPlayers = async (req, res) => {
     else throw new Error("User not found");
 };
 
-export { createUser, authUser, updateUserMoney };
+const updCurrMoney = async (id,price) => {
+    console.log("HEY GUYS")
+    await User.findByIdAndUpdate(id,{currentMoney:price});
+
+}
+
+const updPrevCurrMoney = async (userName,price) =>{
+    let user = await User.findOne({teamName:userName});
+    console.log(user);
+    let newmoney = user.currentMoney + price;
+    console.log("new Money is ",newmoney);
+    await User.findOneAndUpdate({teamName:userName},{currentMoney:user.currentMoney+price});
+    return user.currentMoney;
+}
+
+export { createUser, authUser, updateUserMoney,getUser,updCurrMoney ,updPrevCurrMoney};
