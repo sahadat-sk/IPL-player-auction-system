@@ -8,7 +8,7 @@ import { useState } from "react";
 const LoginPage = () => {
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
-
+    const [error, seterror] = useState(false);
     const navigate = useNavigate();
 
     // useEffect(() => {
@@ -43,17 +43,21 @@ const LoginPage = () => {
                 navigate("/mainpage");
             }
         } catch (error) {
-            console.log(error);
+            console.log("The user does not exists, try signing up");
+            seterror(true);
         }
     };
 
     return (
         <div className="main">
             <form className="card-container" onSubmit={submitHandler}>
-                <h1 className="form-heading">Log In</h1>
-                <div className="subtitle">Welcome back  : ) </div>
+                <div className="form-heading bottom-gap">
+                    <div className="sm">LOGIN</div>
+                    <span className="orange">Your</span> Account
+                </div>
+                {error && <div className="error">User does not exists !!</div>}
                 <label className="form-label">
-                    User name
+                    User name :
                     <br />
                     <input
                         type="text"
@@ -62,11 +66,12 @@ const LoginPage = () => {
                         autoComplete="off"
                         onChange={(e) => {
                             setusername(e.target.value);
+                            seterror(false);
                         }}
                     />
                 </label>
                 <label className="form-label">
-                    Password
+                    Password :
                     <br />
                     <input
                         type="password"
@@ -75,10 +80,22 @@ const LoginPage = () => {
                         autoComplete="off"
                         onChange={(e) => {
                             setpassword(e.target.value);
+                            seterror(false);
                         }}
                     />
                 </label>
-                <input className="button login" type="submit" value="Log In" />
+                <input className="button login" type="submit" value="LOGIN" />
+                <div className="no-acc">
+                    Don't have an account?{" "}
+                    <a
+                        className="link"
+                        onClick={(e) => {
+                            navigate("/signup");
+                        }}
+                    >
+                        Sign Up
+                    </a>
+                </div>
             </form>
         </div>
     );

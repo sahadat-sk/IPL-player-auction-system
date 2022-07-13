@@ -76,25 +76,27 @@ const authUser = asyncHandler(async (req, res) => {
     }
 });
 
-const getPlayers = async (req, res) => {
-    let user = await User.findById(req.params.id);
-    if (user) res.status(201).json(user.playersBought);
-    else throw new Error("User not found");
+const updCurrMoney = async (id, price) => {
+    await User.findByIdAndUpdate(id, { currentMoney: price });
 };
 
-const updCurrMoney = async (id,price) => {
-    console.log("HEY GUYS")
-    await User.findByIdAndUpdate(id,{currentMoney:price});
-
-}
-
-const updPrevCurrMoney = async (userName,price) =>{
-    let user = await User.findOne({teamName:userName});
-    console.log(user);
+const updPrevCurrMoney = async (userName, price) => {
+    let user = await User.findOne({ teamName: userName });
+    //console.log(user);
     let newmoney = user.currentMoney + price;
-    console.log("new Money is ",newmoney);
-    await User.findOneAndUpdate({teamName:userName},{currentMoney:user.currentMoney+price});
+    //console.log("new Money is ",newmoney);
+    await User.findOneAndUpdate(
+        { teamName: userName },
+        { currentMoney: user.currentMoney + price }
+    );
     return user.currentMoney;
-}
+};
 
-export { createUser, authUser, updateUserMoney,getUser,updCurrMoney ,updPrevCurrMoney};
+export {
+    createUser,
+    authUser,
+    updateUserMoney,
+    getUser,
+    updCurrMoney,
+    updPrevCurrMoney,
+};

@@ -9,6 +9,7 @@ const SignupPage = () => {
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
     const [isChecked, setisChecked] = useState(false);
+    const [error, seterror] = useState(false);
 
     const navigate = useNavigate();
 
@@ -47,14 +48,18 @@ const SignupPage = () => {
             navigate("/mainpage");
         } catch (error) {
             console.log(error);
+            seterror(true);
         }
     };
 
     return (
         <div className="main">
             <form className="card-container" onSubmit={submitHandler}>
-                <h1 className="form-heading">Sign Up</h1>
-                <div className="subtitle">and start bidding.. </div>
+                <div className="form-heading bottom-gap">
+                    <div className="sm">Sign Up</div>
+                    Getting <span className="orange">Started</span>
+                </div>
+                {error && <div className="error">User already exists !!</div>}
                 <label className="form-label">
                     User name
                     <br />
@@ -64,6 +69,7 @@ const SignupPage = () => {
                         className="input"
                         onChange={(e) => {
                             setusername(e.target.value);
+                            seterror(false);
                         }}
                     />
                 </label>
@@ -76,10 +82,12 @@ const SignupPage = () => {
                         className="input"
                         onChange={(e) => {
                             setpassword(e.target.value);
+                            seterror(false);
                         }}
                     />
                 </label>
-                <label className="check">
+
+                {/* <label className="check">
                     Are you an Admin ?
                     <input
                         type="checkbox"
@@ -90,8 +98,19 @@ const SignupPage = () => {
                         onChange={handleCheckboxChange}
                         className="checkbox"
                     />
-                </label>
+                </label> */}
                 <input className="button login" type="submit" value="Sign Up" />
+                <div className="no-acc">
+                    Already have an account?{" "}
+                    <a
+                        className="link"
+                        onClick={(e) => {
+                            navigate("/login");
+                        }}
+                    >
+                        LogIn
+                    </a>
+                </div>
             </form>
         </div>
     );

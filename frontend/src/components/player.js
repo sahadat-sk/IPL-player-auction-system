@@ -22,31 +22,10 @@ const Player = ({
     const [isExpired, setIsExpired] = useState(false);
     const [renderTimer, setRenderTimer] = useState(isRunning);
     const [time, setTime] = useState(Date.parse(timeLeft));
+    const [error, setError] = useState(false);
 
-    //console.log("timeLeft is ", Date.parse(timeLeft));
     const clickHandler = async () => {
-        //console.log(price);
-
-        //method 1 #refresh does not work
-        // const currUserId = JSON.parse(localStorage.getItem("userInfo")).id;
-        // const currMoney = JSON.parse(
-        //     localStorage.getItem("userInfo")
-        // ).currentMoney;
-        // console.log(currMoney);
-
-        //not logical
-        // let user = null;
-        // if (currMoney >= price) {
-        //      user = await axios.get("/user/" + currUserId);
-        //      localStorage.setItem("userInfo", JSON.stringify(user.data));
-        // }else {
-        //     alert("You don't have enough money");
-        //     return;
-        // }
-        // if (user.data.currentMoney <= price)
-        //     console.log("NOT ENOUGH MONEY", user.data.currentMoney);
-
-        let {data} = await axios.get("/user/" + userId);
+        let { data } = await axios.get("/user/" + userId);
         //console.log("User is",data.currentMoney);
         let currMoney = data.currentMoney;
         //currMoney = 100000; //for testing
@@ -65,10 +44,6 @@ const Player = ({
             });
 
             setIsSold(true);
-            // let user = JSON.parse(localStorage.getItem("userInfo"));
-            // user.currMoney = user.currentMoney - price;
-            // localStorage.setItem("userInfo", JSON.stringify(user));
-
             setOwner(userName);
             socket.emit("current_owner", { owner: userName, id });
             console.log("current Money", currMoney, price);
@@ -76,15 +51,19 @@ const Player = ({
                 id: userId,
                 price: currMoney - price,
             });
-            socket.emit("change_prev_user_money",{id:owner,price:price-100});
+            if (curr_owner !== "none")
+                socket.emit("change_prev_user_money", {
+                    id: owner,
+                    price: price - 100,
+                });
+        } else if (currMoney < price) {
+            setError(true);
+            setTimeout(() => {
+                setError(false);
+            }, 1000);
         }
     };
     useEffect(() => {
-        // if (!isExpired) {
-        //     setRenderTimer(true);
-        // }else{
-        //     setRenderTimer(false);
-        // }
         socket.on("bid_inc", (data) => {
             // console.log(data);
             if (data.id === id) {
@@ -103,9 +82,6 @@ const Player = ({
                 if (!renderTimer) {
                     setRenderTimer(true);
                     let time = data.timeLeft;
-                   // console.log("time Left : ", Date.parse(time));
-                    //time.setSeconds(time.getSeconds() + 600);
-                    //console.log("time Left 2 : ", time);
 
                     setTime(Date.parse(time));
                 }
@@ -118,25 +94,12 @@ const Player = ({
                 setRenderTimer(false);
             }
         });
-        // socket.on("change_money", (data) => {
-        //     console.log("data is ",data);
-        //     if (data.id === id) {
-        //         console.log(data);
-        //         setPrice(data.price);
-        //         let user = JSON.parse(localStorage.getItem("userInfo"));
-        //         user.currMoney = data.price;
-        //         localStorage.setItem("userInfo", JSON.stringify(user));
-        //     }
-        // })
     }, [id, renderTimer]);
-    // const time = new Date();
-    // time.setSeconds(time.getSeconds() + 6000);
 
     return (
         <div className="player-card pl-blur ">
             {renderTimer && (
                 <div>
-                    <div className="name cditem">{name}</div>
                     {renderTimer && (
                         <Timer
                             expiryTimestamp={time}
@@ -144,34 +107,39 @@ const Player = ({
                             owner={owner}
                             price={price}
                             isSold={isSold}
+                            className="timer"
                         />
                     )}
+                    <div className="name run-name cditem">{name}</div>
 
-                    <div className="owner cditem">current bidder {owner}</div>
                     <div className="curr-price cditem">
-                        Current Price
-                        <br />
-                        <div className="price">{price} lacs</div>
+                        Current bid: <div className="price">{owner}</div>{" "}
                     </div>
-                    <button
-                        className="button bid-button"
-                        onClick={clickHandler}
-                    >
+                    <div className="curr-price cditem">
+                        Current Price :
+                        <br />
+                        <div className="price">
+                            <span className="orange">{price}</span> lacs
+                        </div>
+                    </div>
+                    <button className="button gap" onClick={clickHandler}>
                         Bid
                     </button>
+                    {error && <div className="error">Not enough money !!</div>}
                 </div>
             )}
             {!renderTimer && isSold && (
                 <div>
                     <div className="name cditem">{name}</div>
                     <div className="curr-price cditem">
-                        Player sold for <br />
-                        <div className="price">{price} lacs</div>
+                        Sold for : <br />
+                        <div className="price">
+                            <span className="orange">{price}</span> lacs
+                        </div>
                     </div>
                     <br />
                     <div className="cditem">
-                        Sold to
-                        <div className="price">{owner}</div>
+                        Sold to :<div className="price">{owner}</div>
                     </div>
                 </div>
             )}

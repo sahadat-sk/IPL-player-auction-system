@@ -6,21 +6,22 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-    gap: 2rem;
-    align-items: center;
+    
+    align-items: left;
     margin: 2rem;
     margin: 3.5rem;
 }
 .form-label {
     color: whitesmoke;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     width: 100%;
-    font-weight: 50;
+    font-weight: 350;
 }
 .form-heading {
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: #ededed;
-    font-weight: 50;
+    font-weight: 300;
+    
 }
 .main {
     height: 100vh;
@@ -33,10 +34,10 @@
     flex-direction: column;
     align-items: left;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 .login {
-    width: 100%;
+    width: 50%;
     margin-top: 2rem;
 }
 .input {
@@ -46,6 +47,7 @@
     border-bottom: 1px solid whitesmoke;
     width: 100%;
     color: whitesmoke;
+    margin-bottom: 3.4rem;
 }
 .players {
     display: flex;
@@ -116,17 +118,20 @@
 .mp-heading{
     margin-left: 2rem;
     width: 100%;
-    font-weight: 70;
+    font-weight: 300;
 }
 .mp-button{
     margin-right: 2rem;
     margin-left: 1rem;
 }
 .currMoney{
-    text-align: right;
+    text-align: left;
     margin-right: 2rem;
+    margin-left: 2rem;
     font-size: 2rem;
     color:whitesmoke;
+    margin-bottom: 0;
+    
 }
 .playersBought{
     text-align: left;
@@ -134,3 +139,113 @@
     font-size: 1.5rem;
     color:whitesmoke;
 }
+.error{
+    color: red;
+    font-size: 1.1rem;
+    margin-bottom:.5rem;
+
+}
+.bottom-gap{
+    margin-bottom: 2rem;
+}
+.sm{
+   
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.no-acc{
+    margin-top:1.5rem;
+    color:rgb(210, 208, 208);
+    font-size: 1.1rem;
+}
+.link{
+    cursor: pointer;
+}
+
+.orange{
+    color: #FD0015;
+}
+.blue{
+    color:#00affd;
+}
+.run-name{
+    border-bottom:1rem;
+}
+
+@media only screen and (max-width:480px){
+    .card-container{
+        height: 100%;
+        width: 90%;
+        margin-left: 1rem;
+    }
+    .form-label{
+        font-size: 1.2rem;
+    }
+    .form-heading{
+        font-size: 3rem;
+    }
+    .main{
+        height: 100vh;
+        width: 100%;
+        background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/colorful-abstract-nebula-space-background.jpg");
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+        gap: 1rem;
+    }
+    .login{
+        width: 100%;
+    }
+    .input{
+        width: 100%;
+    }
+    .players{
+        display: flex;
+        height: 100%;
+        width: 100%;
+
+        align-items: center;
+        justify-content: center;
+
+        flex-wrap: wrap;
+        overflow: auto;
+    }
+    .players-admin{
+        display: inline;
+        width: 100%;
+        overflow: scroll;
+    }
+    .player-card{
+        height: 20rem;
+        width: 20%;
+        background-color: yellow;
+        border-radius: 1%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .check{
+        font-size: 1.5rem;
+        color: whitesmoke;
+        font-weight: 15;
+    }
+    
+    .bid{
+        background-color: red;
+    }
+    .admin-main{
+        display: flex;
+        flex-direction: column;
+    }
+    .mp-heading{
+        font-size:2.5rem;
+    }
+    .currMoney{
+        font-size: 1.3rem;
+    }
+} 

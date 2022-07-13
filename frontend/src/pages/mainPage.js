@@ -16,8 +16,7 @@ const MainPage = () => {
     const [userName, setUserName] = useState("");
     const [isRunning, setIsRunning] = useState(true);
     const [time, setTime] = useState(new Date().setSeconds(6000));
-    const [currMoney, setCurrMoney] = useState(
-        JSON.parse(localStorage.getItem("userInfo")).currentMoney
+    const [currMoney, setCurrMoney] = useState(0
     );
 
     //time.setSeconds(time.getSeconds() + 60);
@@ -60,6 +59,7 @@ const MainPage = () => {
             } else if (data.id === userName) {
                 //setCurrMoney(currMoney + data.price);
                 userMoney();
+                //setCurrMoney(data.price);
             }
         });
         players();
@@ -70,7 +70,9 @@ const MainPage = () => {
     return (
         <div className="main">
             <div className="heading blur ">
-                <div className="title mp-heading">Available Players</div>
+                <div className="title mp-heading">
+                    <span className="orange">Auction</span> Home
+                </div>
                 <div
                     className="button mp-button"
                     onClick={() => {
@@ -89,7 +91,15 @@ const MainPage = () => {
             >
                 My Players
             </div> */}
-            <div className="currMoney ">Available money : {currMoney}</div>
+            <div className="currMoney ">
+                <div className="user-name">
+                    Team: <span className="orange">{userName}</span>{" "}
+                </div>
+                <div className="user-money">
+                    <span className="orange">Account </span>Balance: {currMoney}{" "}
+                    lacs
+                </div>
+            </div>
             {/* <Timer expiryTimestamp={time} /> */}
             <div className="players">
                 {/* <Player name="dhoni" inprice={10} id="1"></Player>

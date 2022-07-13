@@ -6,8 +6,13 @@ const landingPage = () => {
         <>
             <div className="landing-page">
                 <div className="landing-page-header">
-                    <div className="title">IPL Player auction system</div>
-                    <div className="subtitle">Let's make a bid </div>
+                    <div className="title ld-title">
+                        IPL Player <span className="orange">auction</span>{" "}
+                        system
+                    </div>
+                    <div className="subtitle ld-sub">
+                        Let's <span className="orange">make</span> a bid{" "}
+                    </div>
                 </div>
                 <div className="auth">
                     <Link to="/signup">
