@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7e7dafe0.css",
+    "main.js": "/static/js/main.c0417b77.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/colorful-abstract-nebula-space-background.jpg": "/static/media/colorful-abstract-nebula-space-background.ad8bcfe232195d051003.jpg",
+    "index.html": "/index.html",
+    "main.7e7dafe0.css.map": "/static/css/main.7e7dafe0.css.map",
+    "main.c0417b77.js.map": "/static/js/main.c0417b77.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7e7dafe0.css",
+    "static/js/main.c0417b77.js"
+  ]
+}
