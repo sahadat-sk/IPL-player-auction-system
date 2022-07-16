@@ -15,6 +15,7 @@ import path from "path";
 //connecting to the databse
 connectDb();
 
+
 const app = express();
 app.use(express.json()); // to read json data
 app.use(
