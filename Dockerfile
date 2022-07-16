@@ -1,15 +1,17 @@
-FROM node:10 AS ui-build
-WORKDIR /home/sahadat/Documents/web_dev/ipl_app
-COPY frontend/ ./frontend/
-RUN cd frontend && npm install && npm run build
+FROM node:16-alpine
 
-FROM node:10 AS server-build
-WORKDIR /root/
-COPY --from=ui-build /home/sahadat/Documents/web_dev/ipl_app/frontend/build ./frontend/build
-COPY package*.json ./
+RUN npm install -g nodemon
+
+WORKDIR /app
+
+COPY package.json .
+
 RUN npm install
-COPY server/app.js ./server/
 
-EXPOSE 3080
+COPY . .
 
-CMD ["node", "./server/app.js"]
+EXPOSE 5000
+
+RUN cd ./server
+
+CMD ["nodemon","/app/server/app.js"]

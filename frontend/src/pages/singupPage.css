@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     justify-content: left;
-    
+
     align-items: left;
     margin: 2rem;
     margin: 3.5rem;
@@ -21,12 +21,11 @@
     font-size: 3.5rem;
     color: #ededed;
     font-weight: 300;
-    
 }
 .main {
     height: 100vh;
     width: 100%;
-    background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/colorful-abstract-nebula-space-background.jpg");
+    background-image: url("../bgimage/colorful-abstract-nebula-space-background.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: absolute;
@@ -102,7 +101,7 @@
 .add-btn {
     padding: 1rem;
     margin-bottom: 2rem;
-    margin-left:1rem;
+    margin-left: 1rem;
     height: 4rem;
     width: 9rem;
 }
@@ -111,83 +110,80 @@
     justify-content: center;
     align-items: center;
 }
-.blur{
-     background: transparent;
+.blur {
+    background: transparent;
     /* backdrop-filter: blur(0px); */
 }
-.mp-heading{
+.mp-heading {
     margin-left: 2rem;
     width: 100%;
     font-weight: 300;
 }
-.mp-button{
+.mp-button {
     margin-right: 2rem;
     margin-left: 1rem;
 }
-.currMoney{
+.currMoney {
     text-align: left;
     margin-right: 2rem;
     margin-left: 2rem;
     font-size: 2rem;
-    color:whitesmoke;
+    color: whitesmoke;
     margin-bottom: 0;
-    
 }
-.playersBought{
+.playersBought {
     text-align: left;
     margin-left: 2rem;
     font-size: 1.5rem;
-    color:whitesmoke;
+    color: whitesmoke;
 }
-.error{
+.error {
     color: red;
     font-size: 1.1rem;
-    margin-bottom:.5rem;
-
+    margin-bottom: 0.5rem;
 }
-.bottom-gap{
+.bottom-gap {
     margin-bottom: 2rem;
 }
-.sm{
-   
+.sm {
     font-size: 1.5rem;
     font-weight: 500;
 }
-.no-acc{
-    margin-top:1.5rem;
-    color:rgb(210, 208, 208);
+.no-acc {
+    margin-top: 1.5rem;
+    color: rgb(210, 208, 208);
     font-size: 1.1rem;
 }
-.link{
+.link {
     cursor: pointer;
 }
 
-.orange{
-    color: #FD0015;
+.orange {
+    color: #fd0015;
 }
-.blue{
-    color:#00affd;
+.blue {
+    color: #00affd;
 }
-.run-name{
-    border-bottom:1rem;
+.run-name {
+    border-bottom: 1rem;
 }
 
-@media only screen and (max-width:480px){
-    .card-container{
+@media only screen and (max-width: 480px) {
+    .card-container {
         height: 100%;
         width: 90%;
         margin-left: 1rem;
     }
-    .form-label{
+    .form-label {
         font-size: 1.2rem;
     }
-    .form-heading{
+    .form-heading {
         font-size: 3rem;
     }
-    .main{
+    .main {
         height: 100vh;
         width: 100%;
-        background-image: url("/home/sahadat/Documents/web_dev/ipl_app/frontend/src/bgimage/colorful-abstract-nebula-space-background.jpg");
+        background-image: url("../bgimage/colorful-abstract-nebula-space-background.jpg");
         background-size: 100% 100%;
         background-repeat: no-repeat;
         position: absolute;
@@ -197,13 +193,13 @@
         justify-content: center;
         gap: 1rem;
     }
-    .login{
+    .login {
         width: 100%;
     }
-    .input{
+    .input {
         width: 100%;
     }
-    .players{
+    .players {
         display: flex;
         height: 100%;
         width: 100%;
@@ -214,12 +210,12 @@
         flex-wrap: wrap;
         overflow: auto;
     }
-    .players-admin{
+    .players-admin {
         display: inline;
         width: 100%;
         overflow: scroll;
     }
-    .player-card{
+    .player-card {
         height: 20rem;
         width: 20%;
         background-color: yellow;
@@ -229,23 +225,23 @@
         justify-content: center;
         align-items: center;
     }
-    .check{
+    .check {
         font-size: 1.5rem;
         color: whitesmoke;
         font-weight: 15;
     }
-    
-    .bid{
+
+    .bid {
         background-color: red;
     }
-    .admin-main{
+    .admin-main {
         display: flex;
         flex-direction: column;
     }
-    .mp-heading{
-        font-size:2.5rem;
+    .mp-heading {
+        font-size: 2.5rem;
     }
-    .currMoney{
+    .currMoney {
         font-size: 1.3rem;
     }
-} 
+}

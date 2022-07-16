@@ -11,8 +11,21 @@ import {
     updCurrMoney,
     updPrevCurrMoney,
 } from "./controllers/userControllers.js";
+import path from "path";
 //connecting to the databse
 connectDb();
+
+const app = express();
+app.use(express.json()); // to read json data
+app.use(
+    cors({
+        origin: "*",
+    })
+);
+
+app.use(userRouter);
+
+
 
 //..............deployment .........................................
 const __dirname1 = path.resolve();
@@ -34,15 +47,9 @@ if (process.env.NODE_ENV === "production") {
 
 //..............deployment .........................................
 
-const app = express();
-app.use(express.json()); // to read json data
-app.use(
-    cors({
-        origin: "*",
-    })
-);
 
-app.use(userRouter);
+
+
 
 const server = app.listen(process.env.PORT_NO, () => {
     console.log(`listining to port ${process.env.PORT_NO}`);
