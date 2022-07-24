@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 });
 router.post("/signup", createUser);
 router.post("/login", authUser);
-router.get("/mainpage", playerController);
+router.get("/mainpage/:val", playerController);
 router.put("/mainpage", playerUpdater);
 router.post("/mainpage/addplayer", addPlayer);
 router.get("/user/:id", getUser);

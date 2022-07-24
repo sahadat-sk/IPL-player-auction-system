@@ -1,7 +1,21 @@
 import Player from "../models/playerModel.js";
 import User from "../models/userModel.js";
 const playerController = async (req, res) => {
-    const data = await Player.find({});
+    let data;
+    let getPlayers = req.params.val ;
+    
+
+    if(getPlayers == "Running"){
+        data = await Player.find({is_auc_running: true});
+    }else if(getPlayers == "Sold"){
+        data = await Player.find({curr_status: "sold",is_auc_running: false});
+    }else if(getPlayers == "Unsold"){
+        data = await Player.find({curr_status: "unsold"});
+    }else if(getPlayers == "All"){
+        data = await Player.find({});
+    }
+
+   
 
     if (data) {
         //console.log(data);
@@ -65,11 +79,17 @@ const getPlayer = async (req, res) => {
     else throw new Error("Player not found");
 };
 
-const updateTime = async (id, time) => {
-    const player = await Player.findByIdAndUpdate(id, {
-        expires_on: time,
-        is_auc_running: true,
-    });
+const updateTime = async (id, time, runningStat) => {
+    if (time) {
+        await Player.findByIdAndUpdate(id, {
+            expires_on: time,
+            is_auc_running: true,
+        });
+    } else {
+        await Player.findByIdAndUpdate(id, {
+            is_auc_running: false,
+        });
+    }
 };
 
 export { playerController, playerUpdater, addPlayer, getPlayer, updateTime };

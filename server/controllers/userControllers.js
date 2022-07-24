@@ -17,12 +17,7 @@ const getUser = asyncHandler(async (req, res) => {
 const updateUserMoney = async (userId, price) => {
     let user = await User.findById(userId);
     if (user) {
-        let newMoney = user.currentMoney - price;
-        if (newMoney < 0) {
-            return;
-        }
-        await User.findByIdAndUpdate(userId, { currentMoney: newMoney });
-        return newMoney;
+        await User.findByIdAndUpdate(userId, { money: user.currentMoney});
     }
 };
 

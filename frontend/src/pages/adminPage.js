@@ -36,7 +36,7 @@ const MainPage = () => {
             navigate("/mainpage");
         }
         const players = async () => {
-            const { data } = await axios.get("/mainpage");
+            const { data } = await axios.get("/mainpage/All");
             setPlayers(data);
         };
         const info = JSON.parse(localStorage.getItem("userInfo"));

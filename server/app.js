@@ -69,16 +69,11 @@ io.on("connection", (socket) => {
     });
     socket.on("exp", (data) => {
         //console.log(data);
-        async function updateMoney() {
-            await updateUserMoney(data.userId, data.price);
-        }
-        if (data.isSold) {
-            let newMoney = updateMoney();
-            socket.broadcast.emit("change_money", {
-                newMoney,
-                userId: data.userId,
-            });
-        }
+       async function updTime() {
+           await updateTime(data.id, data.timeLeft, true);
+       }
+       //console.log(data.timeLeft+60);
+       updTime();
         socket.broadcast.emit("timeout", data);
     });
     socket.on("curr_time", (time) => {
@@ -91,7 +86,7 @@ io.on("connection", (socket) => {
     socket.on("start_auction", (data) => {
         //update time id db
         async function updTime() {
-            await updateTime(data.id, data.timeLeft);
+            await updateTime(data.id, data.timeLeft,true);
         }
         //console.log(data.timeLeft+60);
         updTime();

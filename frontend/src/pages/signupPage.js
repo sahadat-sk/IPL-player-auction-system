@@ -67,6 +67,7 @@ const SignupPage = () => {
                         type="text"
                         name="name"
                         className="input"
+                        autoComplete="off"
                         onChange={(e) => {
                             setusername(e.target.value);
                             seterror(false);

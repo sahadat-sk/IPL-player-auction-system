@@ -15,6 +15,8 @@ const Player = ({
     curr_owner,
     timeLeft,
     isRunning,
+    setChange,
+    change
 }) => {
     const [price, setPrice] = useState(inprice);
     const [isSold, setIsSold] = useState(curr_owner === "none" ? false : true);
@@ -78,6 +80,7 @@ const Player = ({
         });
 
         socket.on("start_timer", (data) => {
+            setChange(!change);
             if (data.id === id) {
                 if (!renderTimer) {
                     setRenderTimer(true);
@@ -94,7 +97,8 @@ const Player = ({
                 setRenderTimer(false);
             }
         });
-    }, [id, renderTimer]);
+        setChange(!change)
+    }, [id, renderTimer,time,owner]);
 
     return (
         <div className="player-card pl-blur ">
@@ -152,7 +156,7 @@ const Player = ({
                     </div>
                     <br />
                     <div className="cditem">
-                        auction for this player will start soon
+                        Auction for this player will start soon
                     </div>
                 </div>
             )}

@@ -33,7 +33,7 @@
     flex-direction: column;
     align-items: left;
     justify-content: center;
-    gap: 1rem;
+    
 }
 .login {
     width: 50%;
@@ -64,16 +64,7 @@
     width: 100%;
     overflow: scroll;
 }
-.player-card {
-    height: 20rem;
-    width: 20%;
-    background-color: yellow;
-    border-radius: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+
 .check {
     font-size: 1.5rem;
     color: whitesmoke;
@@ -112,24 +103,26 @@
 }
 .blur {
     background: transparent;
+    justify-content: flex-start;
     /* backdrop-filter: blur(0px); */
 }
 .mp-heading {
-    margin-left: 2rem;
-    width: 100%;
+    /* margin-left: 2rem; */
+    width: 50%;
     font-weight: 300;
+    text-align: center;
 }
 .mp-button {
     margin-right: 2rem;
-    margin-left: 1rem;
+    margin-left: 25%;
 }
 .currMoney {
     text-align: left;
-    margin-right: 2rem;
-    margin-left: 2rem;
-    font-size: 2rem;
+    width:25%;
+    font-size: 1.4rem;
     color: whitesmoke;
     margin-bottom: 0;
+    padding-left:1rem;
 }
 .playersBought {
     text-align: left;
@@ -166,6 +159,52 @@
 }
 .run-name {
     border-bottom: 1rem;
+}
+.show-btn{
+    background-color: #43001696;
+    color:aliceblue;
+    font-size:1.2rem;
+    height: 3rem;
+    width:25%;
+    border:none;
+    outline:none;
+    transition: all .2s;
+
+}
+.show-btn:hover{
+    background-color: #430016;
+    color: #FD0015;
+    font-size:1.2rem;
+    height: 3rem;
+    width:25%;
+    border: none;
+    
+}
+.show-btn-selected{
+    
+    background-color:  #430016;
+    color: #FD0015;
+    font-size:1.2rem;
+    height: 3rem;
+    width:25%;
+    border: none;
+    border-bottom:2px solid #fd0015;
+    outline:none;
+
+
+}
+.filter{
+    margin-bottom : 0rem;
+}
+.no-players{
+    font-size: 2rem;
+    color: #ededed;
+}
+.filter-btn{
+    display:none;
+}
+.none{
+    display:none;
 }
 
 @media only screen and (max-width: 480px) {
@@ -238,10 +277,42 @@
         display: flex;
         flex-direction: column;
     }
-    .mp-heading {
-        font-size: 2.5rem;
-    }
+    
     .currMoney {
         font-size: 1.3rem;
+    }
+    .filter{
+        display:flex;
+        flex-direction:column;
+        transition: all 0.3s;
+    }
+    .show-btn{
+        width:100%;
+    }
+    .show-btn-selected{
+        width:100%;
+    }
+    .filter-btn{
+        display:inline-block;
+        text-align: right;
+        padding-right:1rem;
+        background-color: #430016;
+        color: #FFF;
+        font-size:1.2rem;
+        outline: none;
+        border: none;
+    }
+    .mp-heading{
+        display: none;
+    }
+    .heading{
+        flex-direction: column;
+    }
+    .currMoney{
+        width: 100%;
+        margin-bottom:1rem;
+    }
+    .mp-button{
+        margin-bottom:1rem;
     }
 }

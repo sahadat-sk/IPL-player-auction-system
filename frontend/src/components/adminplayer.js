@@ -31,10 +31,10 @@ const Player = ({ name, inprice, id, curr_status }) => {
                 Current Price(lac) : <br />
                 {price}
             </div>
-            {isSold && <div className="status cditem">{curr_status}</div>}
-            {!isSold && (
+            {/* {isSold && <div className="status cditem">{curr_status}</div>} */}
+            {/* {!isSold && (
                 <button  className="button" onClick={startAuctionHandler}>Start </button>
-            )}
+            )} */}
             {/* //remove the line */}
             <button className="button" onClick={startAuctionHandler}>Start </button>
         </div>

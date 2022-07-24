@@ -18,7 +18,7 @@ const mySchema = new mongoose.Schema(
         },
         money:{
             type: Number,
-            default: 1000
+            default: 10000
         },
         currentMoney: {
             type: Number,
